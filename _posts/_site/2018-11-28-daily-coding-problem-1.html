@@ -1,0 +1,64 @@
+<p>This is my take on the exercises sent by subscribing to <a href="https://www.dailycodingproblem.com/">Daily Coding Problem</a></p>
+
+<p>Today’s problem is:</p>
+
+<blockquote>
+  <p>Given a list of numbers, return whether any two sums to k.
+For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+Bonus: Can you do this in one pass?</p>
+</blockquote>
+
+<h4 id="solution">Solution</h4>
+
+<p>I wrote my solution in C#:</p>
+
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">public</span> <span class="k">class</span> <span class="nc">TwoSum</span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">Evaluate</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="kt">bool</span> <span class="n">result</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">visitedValues</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;();</span>
+        <span class="kt">var</span> <span class="n">complement</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+            <span class="n">complement</span> <span class="p">=</span> <span class="n">k</span> <span class="p">-</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">visitedValues</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">complement</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">//we found our pair, return true</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">visitedValues</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="explanation">Explanation</h3>
+
+<p>The basic implementation of this program would be to iterate over every entry in the list and calculate if any two pairs sums to the k amount, however comparing every object of a list of size N against all elements in the same list would result in a O((N-1) * (N - 1)) if we ignored the current element we are visiting, which is almost equivalent to O(N^2) comparison in a worst case scenario, as the problem never stated that the list was ordered (Insight: it would help clarify this and come up with a solution that would take advantage of this). Think of a list of only 3 elements [4, 3, 10] and k = 13. We would calculate the sum of 2 + 3 until the one-to-last iteration. It would go something like this:</p>
+
+<p>4 + 3 = 7
+4 + 10 = 14
+Iterate over the next element:
+3 + 4 = 7
+3 + 10 = 13 –&gt; Bingo!</p>
+
+<p>We did 4 comparisons before we came up with the answer. If k was a different value that was not achievable it would get worst as we would iterate over each element N - 1 times as described before.</p>
+
+<p>We can do better than that.</p>
+
+<p>If we know the target value (k) then we can store the previous values on a different structure, after all, we were not told that there was a memory constraint, only that we try to achieve this in one pass. It would obviously can get messy as we would now use potentially O(N) memory to calculate it, but the tradeoff is worth it as we can calculate the result in O(N) time!</p>
+
+<p>When we pass over each element, we can:</p>
+<ol>
+  <li>Calculate how much do we need to get to the sum k (the ‘complement’ variable in my example)</li>
+  <li>If the complement has not been stored before, we can store the value of the current element.</li>
+  <li>If we have previously visited a value that computes to the complement, we know there are at least two values that sum to k so we can safely return true at this point.</li>
+  <li>If we never run into the complement of every element in the list we can assure that there was no 2 values in the list that sum k and return false.</li>
+</ol>
+
+<p>The trick here is using a data structure that allows to check for stored values and do this in constant time O(1). A hashmap, or in the case of .Net a Dictionary, is a structure designed just for this, where we can look up values and the time to search for them is theoretically O(1). I’d invite you to review the actual implementation of the <a href="https://referencesource.microsoft.com/#mscorlib/system/collections/generic/dictionary.cs,bcd13bb775d408f1">.Net Dictionary&lt;TKey, TValue&gt; class</a> class as it is really interesting.</p>
+
+<p>That’s all for today! Hope you have learned something cool today and remember to always read the problem twice before attempting to solve and don’t rush to code solutions without having a good understanding of what is actually being asked.</p>
+
+<blockquote>
+  <p>Na lû e-govaned ‘wîn</p>
+</blockquote>
