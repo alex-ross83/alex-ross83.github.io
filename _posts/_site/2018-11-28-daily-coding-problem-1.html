@@ -4,8 +4,9 @@
 
 <blockquote>
   <p>Given a list of numbers, return whether any two sums to k.
-For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
-Bonus: Can you do this in one pass?</p>
+For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.</p>
+
+  <p>Bonus: Can you do this in one pass?</p>
 </blockquote>
 
 <h4 id="solution">Solution</h4>
@@ -24,7 +25,9 @@ Bonus: Can you do this in one pass?</p>
                 <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
             <span class="p">}</span>
             <span class="k">else</span> <span class="p">{</span>
-                <span class="n">visitedValues</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(!</span><span class="n">visitedValues</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])){</span>
+                        <span class="n">visitedValues</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span>
+                <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
@@ -33,13 +36,15 @@ Bonus: Can you do this in one pass?</p>
 
 <h3 id="explanation">Explanation</h3>
 
-<p>The basic implementation of this program would be to iterate over every entry in the list and calculate if any two pairs sums to the k amount, however comparing every object of a list of size N against all elements in the same list would result in a O((N-1) * (N - 1)) if we ignored the current element we are visiting, which is almost equivalent to O(N^2) comparison in a worst case scenario, as the problem never stated that the list was ordered (Insight: it would help clarify this and come up with a solution that would take advantage of this). Think of a list of only 3 elements [4, 3, 10] and k = 13. We would calculate the sum of 2 + 3 until the one-to-last iteration. It would go something like this:</p>
+<p>The basic implementation of this program would be to iterate over every entry in the list and calculate if any two pairs sums to the k amount, however comparing every object of a list of size N against all elements in the same list would result in a O((N-1) * (N - 1)) if we ignored the current element we are visiting, which is almost equivalent to O(N^2) comparison in a worst case scenario, as the problem never stated that the list was ordered (Insight: it would help clarify this and come up with a solution that would take advantage of this). Think of a list of only 3 elements [4, 3, 10] and k = 13. We would calculate the sum of 3 + 10  until the one-to-last iteration. It would go something like this:</p>
 
-<p>4 + 3 = 7
-4 + 10 = 14
-Iterate over the next element:
-3 + 4 = 7
-3 + 10 = 13 –&gt; Bingo!</p>
+<ul>
+  <li>4 + 3 = 7</li>
+  <li>4 + 10 = 14</li>
+  <li>Iterate over the next element:</li>
+  <li>3 + 4 = 7</li>
+  <li>3 + 10 = 13 –&gt; Bingo!</li>
+</ul>
 
 <p>We did 4 comparisons before we came up with the answer. If k was a different value that was not achievable it would get worst as we would iterate over each element N - 1 times as described before.</p>
 

@@ -1,0 +1,95 @@
+<p>One new day and one new problem to solve:</p>
+
+<blockquote>
+  <p>Given an array of integers, return a new array such that each element at index i of the new array is the product of all the numbers in the original array except the one at i.
+For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120, 60, 40, 30, 24]. If our input was [3, 2, 1], the expected output would be [2, 3, 6].</p>
+
+  <p>Follow-up: what if you can’t use division?</p>
+</blockquote>
+
+<h4 id="solution">Solution</h4>
+
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">public</span> <span class="k">class</span> <span class="nc">ProductsOfAllButItself</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">Evaluate</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">input</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//init array with ones</span>
+        <span class="kt">int</span><span class="p">[]</span> <span class="n">res</span> <span class="p">=</span> <span class="n">Enumerable</span><span class="p">.</span><span class="nf">Repeat</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">).</span><span class="nf">ToArray</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">zeroCount</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+            <span class="c1">//handle cases with 2 zeroes which would make</span>
+            <span class="c1">//a zero values array and we do not need to evaluate </span>
+            <span class="c1">//anything else</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">zeroCount</span><span class="p">++;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">zeroCount</span> <span class="p">==</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">j</span> <span class="p">&lt;</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">j</span><span class="p">++)</span> <span class="p">{</span>
+                    <span class="n">result</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">&lt;</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">k</span><span class="p">++)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="p">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">//multiple for all but itself</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">=</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">*</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="explanation">Explanation</h3>
+<p>So my first idea was simple, get the overall product of the array (so we would do an O(n) pass) and then to one last pass to iterate over it again, dividing the actual value over the sum and bingo! we have an O(2N) solution</p>
+
+<p>So:</p>
+
+<p>totalProduct = 1 * 2 * 3 * 4 * 5 = 120</p>
+
+<p>Then we divide every element to get each individual value</p>
+
+<ul>
+  <li>Index(0) would be 120 / 1 = 120</li>
+  <li>Index(1) would be 120 / 2 = 60</li>
+  <li>Index(2) would be 120 / 3 = 40</li>
+  <li>Index(3) would be 120 / 4 = 30</li>
+  <li>Index(4) would be 120 / 5 = 24</li>
+</ul>
+
+<p>Profit! Right?</p>
+
+<p>We didn’t get any guarantee over the values in the array, if the problem stated that O(N) elements were values &gt; 1 then that would work. But if we get one single zero here.. the operation fails. That’s what that little insight at the end of the problem talks about as this would be one reason we can’t use division at all.</p>
+
+<p>So we are now thinking on edge cases.</p>
+
+<p>1 zero would be manageable. Only the position where the zero is located would be multipled by all the other values, so if instead we had 6 elements in the input array [0, 1, 2, 3, 4, 5] then the result would be [120, 0, 0, 0, 0, 0].
+To come up with 120, we still need to iterate over all the elements except the current one so this still holds true.</p>
+
+<p>What if we have 2 zeroes?</p>
+
+<p>Then multiplication doesn’t matter anymore! You just need to return an array of length input.Length filled with zeroes and you are good to go!
+This is what I did with my code. I count how many times I have found zeroes, if its one it is ok, I need to iterate over all elements N anyway, but having 2, I can just disregard my current calculations and return an array of zeroes. Otherwise I go my merry way and keep multiplying all numbers, except the current iteration, and multiply each of them.</p>
+
+<p>The manual run would look like this, remembering that at every iteration we don’t multiply the current value by itself:</p>
+
+<ol>
+  <li>Initialize the result array to [1, 1, 1, 1, 1]</li>
+  <li>Iterating over 1 so everything stays the same, still [1, 1, 1, 1, 1]</li>
+  <li>Iterating over 2 so now we have [2, 1, 2, 2, 2]</li>
+  <li>Iteraring over 3 so it is now [6, 3, 2, 6, 6]</li>
+  <li>Iterating over 4 results in [24, 12, 8, 6, 24]</li>
+  <li>Last but not least, multiply by 5 so we end up with [120, 60, 40, 30, 24]</li>
+</ol>
+
+<p>And we did all in one pass so it is O(N) time!</p>
+
+<p>That’s all for today. Remember to be on the lookout for edge cases when attempting to solve your problems as these can change the way the solution will work and ask clarifying questions all the time. If an interviewer told me I should not worry about zeroes then the first solution would have worked without problems, but thinking on special cases can lead to design changes on our algorithm.</p>
+
+<blockquote>
+  <p>Na lû e-govaned ‘wîn</p>
+</blockquote>
