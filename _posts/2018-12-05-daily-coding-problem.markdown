@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Daily Coding Problem #3"
-date:   2018-11-28 20:21:52 +7000
+date:   2018-12-05 23:21:52 +7000
 categories: coding problem
 ---
 
