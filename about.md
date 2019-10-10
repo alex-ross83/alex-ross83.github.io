@@ -4,9 +4,9 @@ title: About
 permalink: /about/
 ---
 
-When not with his wife, Alex-Ross likes to play Overwatch or work on any of his game backlog, play soccer with his children and geek the heck out of stuff.
+When not with his wife, Alex-Ross likes to play videogames or work on any of his game backlog, play with his children and geek the heck out of stuff.
 
-Currently reading to his children "The Two Towers" at night. It never fails to make them sleep.
+Currently reading ~~to his children "The Two Towers" at night. It never fails to make them sleep~~ "Origin" by Dan Brown.
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
 
