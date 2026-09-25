@@ -5,13 +5,12 @@ layout: default
 <article class="post h-entry" itemscope itemtype="https://schema.org/BlogPosting">
 
   <header class="post-header">
-    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
     {%- assign category = page.categories | first -%}
     <span class="kicker">{%- if category -%}{{ category | capitalize }}{%- else -%}{{ s.post_kicker_fallback }}{%- endif -%}</span>
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
+        {% include i18n_date.html date=page.date %}
       </time>
       {%- if page.author -%}
         · <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>

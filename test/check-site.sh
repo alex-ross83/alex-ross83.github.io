@@ -85,4 +85,13 @@ contains es/index.html '<a class="page-link" href="/es/about/">Acerca de</a>'
 contains es/index.html '<p class="footer-desc">Escribo sobre mis experiencias'
 contains index.html '<p class="footer-desc">Writing about my experiences'
 
+echo "== Task 6: dates"
+contains index.html 'Coding · Nov 28, 2018'
+contains index.html 'Coding · Dec 5, 2018'
+contains es/index.html 'Coding · 28 nov 2018'
+contains es/index.html 'Coding · 5 dic 2018'
+contains "es/$P1" '28 nov 2018'
+contains "$P1" 'Nov 28, 2018'
+lacks es/index.html 'Nov 28, 2018'
+
 exit $fail

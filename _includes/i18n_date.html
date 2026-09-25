@@ -1,0 +1,8 @@
+{%- assign d = include.date -%}
+{%- if site.active_lang == "es" -%}
+  {%- assign m = d | date: "%-m" -%}
+  {{- d | date: "%-d" }} {{ site.data.es.months[m] }} {{ d | date: "%Y" -}}
+{%- else -%}
+  {%- assign fmt = site.minima.date_format | default: "%b %-d, %Y" -%}
+  {{- d | date: fmt -}}
+{%- endif -%}
