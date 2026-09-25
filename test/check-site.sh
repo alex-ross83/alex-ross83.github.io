@@ -57,4 +57,17 @@ contains "$P1" 'itemprop="name headline">Daily Coding Problem # 1</h1>'
 absent coding/problem/2018/11/28/daily-coding-problem-1-es.html
 absent es/coding/problem/2018/11/28/daily-coding-problem-1-es.html
 
+echo "== Task 4: lang, hreflang, canonical"
+contains index.html '<html lang="en-US">'
+contains es/index.html '<html lang="es-MX">'
+contains "es/$P1" '<html lang="es-MX">'
+for f in "$P1" "es/$P1"; do
+  contains "$f" "hreflang=\"en-US\" href=\"https://blog.ross-lopez.rocks/$P1\""
+  contains "$f" "hreflang=\"es-MX\" href=\"https://blog.ross-lopez.rocks/es/$P1\""
+done
+contains index.html 'hreflang="es-MX" href="https://blog.ross-lopez.rocks/es/"'
+contains es/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/"'
+contains "es/$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/es/$P1\""
+contains "$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/$P1\""
+
 exit $fail
