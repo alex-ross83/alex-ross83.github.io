@@ -87,10 +87,10 @@ contains es/index.html '<p class="footer-desc">Escribo sobre mis experiencias'
 contains index.html '<p class="footer-desc">Writing about my experiences'
 
 echo "== Task 6: dates"
-contains index.html 'Coding · Nov 28, 2018'
-contains index.html 'Coding · Dec 5, 2018'
-contains es/index.html 'Coding · 28 nov 2018'
-contains es/index.html 'Coding · 5 dic 2018'
+contains index.html 'feed-kicker">Daily Coding Problem · Nov 28, 2018'
+contains index.html 'feed-kicker">Daily Coding Problem · Dec 5, 2018'
+contains es/index.html 'feed-kicker">Daily Coding Problem · 28 nov 2018'
+contains es/index.html 'feed-kicker">Daily Coding Problem · 5 dic 2018'
 contains "es/$P1" '28 nov 2018'
 contains "$P1" 'Nov 28, 2018'
 lacks es/index.html 'Nov 28, 2018'
@@ -130,5 +130,35 @@ same_count index.html es/index.html 'class="feed-post"'
 contains es/index.html 'Un nuevo día y un nuevo problema'
 lacks index.html 'Un nuevo día y un nuevo problema'
 contains es/about/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/about/"'
+
+echo "== Series"
+SER=series/index.html
+exists "$SER"
+exists "es/$SER"
+contains "$SER" '<section class="series" id="daily-coding-problem">'
+contains "es/$SER" '<section class="series" id="daily-coding-problem">'
+contains "$SER" 'My solutions to the problems'
+contains "es/$SER" 'Mis soluciones a los problemas'
+# Parts listed oldest first, each language linking to its own posts
+order=$(grep -o 'href="/[^"]*daily-coding-problem[^"]*\.html"' "$SITE/$SER" 2>/dev/null | tr '\n' ' ')
+[ "$order" = "href=\"/$P1\" href=\"/$P2\" href=\"/$P3\" href=\"/$P4\" " ] && pass "series page lists parts in order" || bad "series page order: $order"
+order=$(grep -o 'href="/es/[^"]*daily-coding-problem[^"]*\.html"' "$SITE/es/$SER" 2>/dev/null | tr '\n' ' ')
+[ "$order" = "href=\"/es/$P1\" href=\"/es/$P2\" href=\"/es/$P3\" href=\"/es/$P4\" " ] && pass "es series page lists parts in order" || bad "es series page order: $order"
+# Nav link
+contains index.html '<a class="page-link" href="/series/">Series</a>'
+contains es/index.html '<a class="page-link" href="/es/series/">Series</a>'
+# Post label: series name + part number, linking to the series section
+contains "$P2" '<a class="kicker" href="/series/#daily-coding-problem">Daily Coding Problem · Part 2 of 4</a>'
+contains "es/$P2" '<a class="kicker" href="/es/series/#daily-coding-problem">Daily Coding Problem · Parte 2 de 4</a>'
+contains "$P4" 'Daily Coding Problem · Part 4 of 4</a>'
+# Previous / next within the series
+lacks "$P1" 'rel="prev"'
+contains "$P1" "rel=\"next\" href=\"/$P2\""
+contains "$P4" "rel=\"prev\" href=\"/$P3\""
+lacks "$P4" 'rel="next"'
+contains "es/$P2" "rel=\"prev\" href=\"/es/$P1\""
+contains "es/$P2" "rel=\"next\" href=\"/es/$P3\""
+contains "es/$P2" '← Anterior'
+contains "$P2" 'Next →'
 
 exit $fail

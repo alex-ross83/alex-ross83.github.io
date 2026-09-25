@@ -1,0 +1,6 @@
+# One entry per series. Posts join a series with `series: <id>` in their front matter.
+daily-coding-problem:
+  title: "Daily Coding Problem"
+  description:
+    en: "My solutions to the problems from the Daily Coding Problem newsletter, with the reasoning behind each answer."
+    es: "Mis soluciones a los problemas del boletín Daily Coding Problem, con el razonamiento detrás de cada respuesta."

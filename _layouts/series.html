@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="post page-article">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {%- for entry in site.data.series -%}
+      {%- assign series_id = entry[0] -%}
+      {%- assign series = entry[1] -%}
+      {%- assign series_posts = site.posts | where: "series", series_id | reverse -%}
+      <section class="series" id="{{ series_id }}">
+        <h2>{{ series.title | escape }}</h2>
+        <p>{{ series.description[site.active_lang] | default: series.description.en }}</p>
+        <ol class="series-list">
+          {%- for post in series_posts -%}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> · {% include i18n_date.html date=post.date %}</li>
+          {%- endfor -%}
+        </ol>
+      </section>
+    {%- endfor -%}
+  </div>
+
+</article>

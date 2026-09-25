@@ -19,7 +19,8 @@ layout: default
       {%- for post in site.posts -%}
       <li class="feed-post">
         {%- assign category = post.categories | first -%}
-        <span class="feed-kicker">{%- if category -%}{{ category | capitalize }} · {% endif -%}{% include i18n_date.html date=post.date %}</span>
+        {%- assign series = site.data.series[post.series] -%}
+        <span class="feed-kicker">{%- if series -%}{{ series.title | escape }} · {% elsif category -%}{{ category | capitalize }} · {% endif -%}{% include i18n_date.html date=post.date %}</span>
         <h2 class="feed-title">
           <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h2>

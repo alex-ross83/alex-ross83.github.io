@@ -178,6 +178,20 @@ a.page-link, .wordmark, .btn{ text-decoration:none; }
 .post-content del{ color:var(--muted); }
 .post-content img{ border-radius:var(--radius); }
 .back-link{ margin-top:48px; }
+
+/* ---------- series ---------- */
+a.kicker{ text-decoration:none; }
+a.kicker:hover{ text-decoration:underline; }
+.series-nav{
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  margin-top:48px; padding-top:24px; border-top:1px solid var(--rule);
+  font-family:var(--font-ui); font-size:14px;
+}
+.series-nav a{ color:var(--ink); text-decoration:none; }
+.series-nav a:hover{ color:var(--accent); }
+.series-next{ margin-left:auto; text-align:right; }
+.series-dir{ display:block; font-size:var(--kicker-size); font-weight:600; letter-spacing:var(--kicker-track); text-transform:uppercase; color:var(--muted); }
+.series + .series{ margin-top:40px; }
 .page-article .post-header{ margin-bottom:24px; }
 
 /* ---------- footer ---------- */

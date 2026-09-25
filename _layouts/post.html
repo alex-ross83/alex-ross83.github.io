@@ -6,7 +6,18 @@ layout: default
 
   <header class="post-header">
     {%- assign category = page.categories | first -%}
+    {%- assign series = site.data.series[page.series] -%}
+    {%- if series -%}
+      {%- assign series_posts = site.posts | where: "series", page.series | reverse -%}
+      {%- for post in series_posts -%}
+        {%- if post.url == page.url -%}{%- assign part_index = forloop.index0 -%}{%- endif -%}
+      {%- endfor -%}
+      {%- assign part = part_index | plus: 1 | append: "" -%}
+      {%- assign total = series_posts.size | append: "" %}
+    <a class="kicker" href="{{ "/series/" | relative_url }}#{{ page.series }}">{{ series.title | escape }} · {{ s.series_part | replace: "%n", part | replace: "%t", total }}</a>
+    {%- else %}
     <span class="kicker">{%- if category -%}{{ category | capitalize }}{%- else -%}{{ s.post_kicker_fallback }}{%- endif -%}</span>
+    {%- endif %}
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
@@ -21,6 +32,21 @@ layout: default
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
+
+  {%- if series %}
+  <nav class="series-nav" aria-label="{{ series.title | escape }}">
+    {%- if part_index > 0 -%}
+      {%- assign prev_index = part_index | minus: 1 -%}
+      {%- assign prev_post = series_posts[prev_index] %}
+    <a class="series-prev" rel="prev" href="{{ prev_post.url | relative_url }}"><span class="series-dir">{{ s.series_previous }}</span> {{ prev_post.title | escape }}</a>
+    {%- endif -%}
+    {%- assign next_index = part_index | plus: 1 -%}
+    {%- if next_index < series_posts.size -%}
+      {%- assign next_post = series_posts[next_index] %}
+    <a class="series-next" rel="next" href="{{ next_post.url | relative_url }}"><span class="series-dir">{{ s.series_next }}</span> {{ next_post.title | escape }}</a>
+    {%- endif %}
+  </nav>
+  {%- endif %}
 
   <a class="btn btn-ghost back-link" href="{{ "/" | relative_url }}">{{ s.back_to_posts }}</a>
 

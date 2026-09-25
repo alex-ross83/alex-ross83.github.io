@@ -3,6 +3,7 @@ layout: post
 title:  "Daily Coding Problem # 4"
 date:   2018-12-06 22:52:30 +7000
 categories: coding problem
+series: daily-coding-problem
 lang: en
 page_id: daily-coding-problem-4
 ---
