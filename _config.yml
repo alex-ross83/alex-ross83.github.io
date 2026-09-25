@@ -11,8 +11,8 @@ github_username:  alex-ross83
 # Build settings
 theme: minima
 show_excerpts: true
-header_pages:
-  - about.markdown
+nav_page_ids:
+  - about
 plugins:
   - jekyll-feed
   - jekyll-polyglot

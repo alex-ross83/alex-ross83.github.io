@@ -70,4 +70,19 @@ contains es/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/"'
 contains "es/$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/es/$P1\""
 contains "$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/$P1\""
 
+echo "== Task 5: UI strings"
+contains index.html '<span class="eyebrow">Daily coding practice</span>'
+contains es/index.html '<span class="eyebrow">Práctica diaria de código</span>'
+contains es/index.html '<span class="kicker">Últimas entradas</span>'
+contains es/index.html 'Suscribirse <a'
+contains es/index.html '>vía RSS</a>'
+contains "es/$P1" '← Todas las entradas'
+contains "$P1" '← All posts'
+contains es/index.html 'data-label-dark="Cambiar a modo oscuro"'
+contains es/index.html 'aria-label="Cambiar a modo oscuro"'
+contains index.html '<a class="page-link" href="/about/">About</a>'
+contains es/index.html '<a class="page-link" href="/es/about/">Acerca de</a>'
+contains es/index.html '<p class="footer-desc">Escribo sobre mis experiencias'
+contains index.html '<p class="footer-desc">Writing about my experiences'
+
 exit $fail

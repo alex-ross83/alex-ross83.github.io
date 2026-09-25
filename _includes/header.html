@@ -1,17 +1,16 @@
+{%- assign s = site.data[site.active_lang].strings | default: site.data.en.strings -%}
 <header class="masthead" role="banner">
   <div class="wrap masthead-row">
     <a class="wordmark" rel="author" href="{{ "/" | relative_url }}">
-      <span class="eyebrow">Daily coding practice</span>
+      <span class="eyebrow">{{ s.eyebrow }}</span>
       <span class="site-title">{{ site.title | escape }}</span>
     </a>
 
     <div class="masthead-right">
-      {%- assign default_paths = site.pages | map: "path" -%}
-      {%- assign page_paths = site.header_pages | default: default_paths -%}
-      {%- if page_paths -%}
-        <nav class="site-nav" aria-label="Primary">
-          {%- for path in page_paths -%}
-            {%- assign my_page = site.pages | where: "path", path | first -%}
+      {%- if site.nav_page_ids -%}
+        <nav class="site-nav" aria-label="{{ s.nav_label }}">
+          {%- for id in site.nav_page_ids -%}
+            {%- assign my_page = site.pages | where: "page_id", id | first -%}
             {%- if my_page.title -%}
             <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
             {%- endif -%}
@@ -19,7 +18,7 @@
         </nav>
       {%- endif -%}
 
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="{{ s.toggle_to_dark }}" data-label-dark="{{ s.toggle_to_dark }}" data-label-light="{{ s.toggle_to_light }}">
         <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 5a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1Zm0 17a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1ZM4.222 5.636a1 1 0 0 1-1.414-1.414l1.414-1.415a1 1 0 1 1 1.415 1.415L4.222 5.636Zm14.142 14.142a1 1 0 0 1-1.414-1.414l1.414-1.415a1 1 0 0 1 1.415 1.415l-1.415 1.414ZM2 13a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2H2Zm18 0a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2h-2ZM4.222 18.364l1.415-1.415a1 1 0 1 1 1.414 1.415l-1.414 1.414a1 1 0 0 1-1.415-1.414ZM18.364 4.222l1.415-1.415a1 1 0 0 1 1.414 1.415l-1.414 1.414a1 1 0 1 1-1.415-1.414ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/>
         </svg>
@@ -46,7 +45,7 @@
   function applyTheme(t){
     document.documentElement.setAttribute('data-theme', t);
     btn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
-    btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.setAttribute('aria-label', t === 'dark' ? btn.getAttribute('data-label-light') : btn.getAttribute('data-label-dark'));
   }
 
   applyTheme(currentTheme());

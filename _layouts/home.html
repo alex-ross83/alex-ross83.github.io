@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- assign s = site.data[site.active_lang].strings | default: site.data.en.strings -%}
 
 <div class="home">
   <div class="home-intro">
@@ -12,7 +13,7 @@ layout: default
 
   {%- if site.posts.size > 0 -%}
     <div class="sec-head">
-      <span class="kicker">{{ page.list_title | default: "Latest" }}</span>
+      <span class="kicker">{{ page.list_title | default: s.latest }}</span>
     </div>
     <ul class="feed">
       {%- for post in site.posts -%}
@@ -30,6 +31,6 @@ layout: default
       {%- endfor -%}
     </ul>
 
-    <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+    <p class="rss-subscribe">{{ s.subscribe }} <a href="{{ "/feed.xml" | relative_url }}">{{ s.via_rss }}</a></p>
   {%- endif -%}
 </div>
