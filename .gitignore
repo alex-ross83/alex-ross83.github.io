@@ -1,6 +1,5 @@
 _site/*
 .sass-cache/*
 .jekyll-cache/*
-Gemfile.lock
  _posts/_site/*
 graphify-out/
