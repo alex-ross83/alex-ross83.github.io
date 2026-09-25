@@ -15,6 +15,18 @@ header_pages:
   - about.markdown
 plugins:
   - jekyll-feed
+  - jekyll-polyglot
+
+languages: ["en", "es"]
+default_lang: "en"
+exclude_from_localization:
+  - "assets"
+  - "graphify-out"
+  - "CNAME"
+parallel_localization: true
+
+sass:
+  sourcemap: never   # documented polyglot/Jekyll-4 caveat
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -37,5 +49,6 @@ plugins:
 #   - vendor/ruby/
 exclude:
   - graphify-out/
+  - test/
   - Gemfile
   - Gemfile.lock

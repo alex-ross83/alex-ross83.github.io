@@ -2,6 +2,8 @@
 permalink: /404.html
 layout: page
 title: 404
+lang: en
+page_id: "404"
 ---
 
 **Page not found :(**

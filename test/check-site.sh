@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Assertions against the built site. Usage: test/check-site.sh [site_dir]
+set -u
+SITE="${1:-_site}"
+fail=0
+
+pass() { printf '  ok    %s\n' "$1"; }
+bad()  { printf '  FAIL  %s\n' "$1"; fail=1; }
+
+exists()   { [ -f "$SITE/$1" ] && pass "exists $1" || bad "missing $1"; }
+absent()   { [ ! -e "$SITE/$1" ] && pass "absent $1" || bad "should not exist: $1"; }
+contains() { grep -qF -- "$2" "$SITE/$1" 2>/dev/null && pass "$1 has: $2" || bad "$1 lacks: $2"; }
+lacks()    { [ -f "$SITE/$1" ] && ! grep -qF -- "$2" "$SITE/$1" && pass "$1 free of: $2" || bad "$1 must exist and not have: $2"; }
+same_count() {
+  local a b
+  a=$(grep -oF -- "$3" "$SITE/$1" 2>/dev/null | wc -l | tr -d ' ')
+  b=$(grep -oF -- "$3" "$SITE/$2" 2>/dev/null | wc -l | tr -d ' ')
+  [ "$a" = "$b" ] && pass "same count of '$3' ($a) in $1 and $2" || bad "count of '$3': $1=$a $2=$b"
+}
+
+P1=coding/problem/2018/11/28/daily-coding-problem-1.html
+P2=coding/problem/2018/11/29/daily-coding-problem-2.html
+P3=coding/problem/2018/12/05/daily-coding-problem.html
+P4=coding/problem/2018/12/06/daily-coding-problem-4.html
+
+echo "== Task 1: URLs in both trees"
+for p in index.html about/index.html 404.html feed.xml "$P1" "$P2" "$P3" "$P4"; do
+  exists "$p"
+  exists "es/$p"
+done
+contains es/index.html 'href="/assets/main.css"'
+contains es/$P1 'href="/assets/main.css"'
+lacks index.html 'rosslopez'
+
+exit $fail

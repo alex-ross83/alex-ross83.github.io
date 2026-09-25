@@ -3,6 +3,8 @@ layout: post
 title:  "Daily Coding Problem # 4"
 date:   2018-12-06 22:52:30 +7000
 categories: coding problem
+lang: en
+page_id: daily-coding-problem-4
 ---
 
 A new problem for today's post! We are playing with the rules here and I'm also using a different language to solve this one:

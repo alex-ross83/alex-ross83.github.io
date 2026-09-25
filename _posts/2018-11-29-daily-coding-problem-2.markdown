@@ -3,6 +3,8 @@ layout: post
 title:  "Daily Coding Problem # 2"
 date:   2018-11-29 22:03:00 +7000
 categories: coding problem
+lang: en
+page_id: daily-coding-problem-2
 ---
 
 One new day and one new problem to solve:

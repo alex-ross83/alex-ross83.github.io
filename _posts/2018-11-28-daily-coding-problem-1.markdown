@@ -3,6 +3,8 @@ layout: post
 title:  "Daily Coding Problem # 1"
 date:   2018-11-28 06:41:30 +0000
 categories: coding problem
+lang: en
+page_id: daily-coding-problem-1
 ---
 
 This is my take on the exercises sent by subscribing to [Daily Coding Problem](https://www.dailycodingproblem.com/)

@@ -2,6 +2,8 @@
 layout: page
 title: About
 permalink: /about/
+lang: en
+page_id: about
 ---
 
 When not with his wife, Alex-Ross likes to play with his children, work on his videogame backlog (currently playing Assassin's Creed Odyssey) and geek the heck out of stuff.
