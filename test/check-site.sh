@@ -44,16 +44,17 @@ absent about-es/index.html
 absent es/404-es.html
 
 echo "== Task 3: Spanish posts"
-n=1
 for P in "$P1" "$P2" "$P3" "$P4"; do
-  contains "es/$P" "itemprop=\"name headline\">Problema de código diario #$n</h1>"
+  # Spanish posts keep the English title
+  title=$(grep -o 'itemprop="name headline">[^<]*</h1>' "$SITE/$P")
+  [ -n "$title" ] && contains "es/$P" "$title" || bad "no title found in $P"
   same_count "$P" "es/$P" '<pre'
   same_count "$P" "es/$P" '<code'
   same_count "$P" "es/$P" 'href="http'
   lacks "es/$P" '&lt;/content&gt;'
-  n=$((n+1))
 done
 contains "$P1" 'itemprop="name headline">Daily Coding Problem # 1</h1>'
+contains "es/$P1" 'Esta es mi versión de los ejercicios'
 absent coding/problem/2018/11/28/daily-coding-problem-1-es.html
 absent es/coding/problem/2018/11/28/daily-coding-problem-1-es.html
 
@@ -123,9 +124,11 @@ contains "es/$P1" 'back-link" href="/es/"'
 contains es/index.html "href=\"/es/$P1\""
 contains es/index.html 'href="/es/feed.xml">vía RSS'
 contains es/feed.xml "/es/$P1"
-lacks feed.xml 'Problema de'
+contains es/feed.xml 'Un nuevo día y un nuevo problema'
+lacks feed.xml 'Un nuevo día y un nuevo problema'
 same_count index.html es/index.html 'class="feed-post"'
-lacks index.html 'Problema de código'
+contains es/index.html 'Un nuevo día y un nuevo problema'
+lacks index.html 'Un nuevo día y un nuevo problema'
 contains es/about/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/about/"'
 
 exit $fail

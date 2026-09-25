@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Problema de código diario #2"
+title:  "Daily Coding Problem # 2"
 date:   2018-11-29 22:03:00 +7000
 categories: coding problem
 lang: es
