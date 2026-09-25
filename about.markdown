@@ -15,7 +15,6 @@ Currently reading "The Secret of Secrets" by Dan Brown.
 This blog started as a home for Alex-Ross's takes on the [Daily Coding Problem](https://www.dailycodingproblem.com/) exercises. Those are still here, collected in their own [series](/series/), but the blog is growing into something bigger: a place to share what he's learning and excited about in tech.
 
 - **AI**: what's new, what's useful, and what's just hype
-- **Cutting-edge startups** worth keeping an eye on
 - **Quick starts** to get you up and running with new tools
 - **Tips and news** from the world of software
 

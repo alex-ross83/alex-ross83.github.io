@@ -15,7 +15,6 @@ Actualmente está leyendo "El último secreto" de Dan Brown.
 Este blog empezó como el lugar donde Alex-Ross compartía su versión de los ejercicios de [Daily Coding Problem](https://www.dailycodingproblem.com/). Siguen aquí, reunidos en su propia [serie](/series/), pero el blog está creciendo hacia algo más grande: un espacio para compartir lo que está aprendiendo y lo que lo emociona del mundo de la tecnología.
 
 - **IA**: qué hay de nuevo, qué sirve de verdad y qué es puro hype
-- **Startups de vanguardia** a las que vale la pena seguirles la pista
 - **Guías rápidas** para arrancar con herramientas nuevas
 - **Tips y noticias** del mundo del software
 
