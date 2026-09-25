@@ -86,8 +86,10 @@ contains es/index.html 'data-label-dark="Cambiar a modo oscuro"'
 contains es/index.html 'aria-label="Cambiar a modo oscuro"'
 contains index.html '<a class="page-link" href="/about/">About</a>'
 contains es/index.html '<a class="page-link" href="/es/about/">Acerca de</a>'
-contains es/index.html '<p class="footer-desc">Escribo sobre mis experiencias'
-contains index.html '<p class="footer-desc">Writing about my experiences'
+contains es/index.html '<p class="footer-desc">Contenido breve sobre IA, problemas de programación, guías rápidas, tips y noticias de tecnología.</p>'
+contains index.html '<p class="footer-desc">Bite-sized takes on AI, coding problems, quick starts, tips and tech news.</p>'
+contains index.html '<title>Rosipedia | Bite-sized takes on AI, coding problems, quick starts, tips and tech news.</title>'
+lacks index.html 'Programming Interview questions'
 
 echo "== Task 6: dates"
 contains index.html 'feed-kicker">Daily Coding Problem · Nov 28, 2018'
