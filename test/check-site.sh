@@ -43,4 +43,17 @@ absent es/about-es/index.html
 absent about-es/index.html
 absent es/404-es.html
 
+echo "== Task 3: Spanish posts"
+n=1
+for P in "$P1" "$P2" "$P3" "$P4"; do
+  contains "es/$P" "itemprop=\"name headline\">Problema de código diario #$n</h1>"
+  same_count "$P" "es/$P" '<pre'
+  same_count "$P" "es/$P" '<code'
+  same_count "$P" "es/$P" 'href="http'
+  n=$((n+1))
+done
+contains "$P1" 'itemprop="name headline">Daily Coding Problem # 1</h1>'
+absent coding/problem/2018/11/28/daily-coding-problem-1-es.html
+absent es/coding/problem/2018/11/28/daily-coding-problem-1-es.html
+
 exit $fail
