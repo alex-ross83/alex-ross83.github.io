@@ -94,4 +94,14 @@ contains "es/$P1" '28 nov 2018'
 contains "$P1" 'Nov 28, 2018'
 lacks es/index.html 'Nov 28, 2018'
 
+echo "== Task 7: language switcher"
+contains "$P1"    "<a class=\"page-link\" lang=\"es-MX\" hreflang=\"es-MX\" href=\"/es/$P1\">ES</a>"
+contains "es/$P1" "<a class=\"page-link\" lang=\"en-US\" hreflang=\"en-US\" href=\"/$P1\">EN</a>"
+contains "es/$P1" '<span class="page-link" lang="es-MX" aria-current="true">ES</span>'
+contains "$P1"    '<span class="page-link" lang="en-US" aria-current="true">EN</span>'
+contains index.html    '<a class="page-link" lang="es-MX" hreflang="es-MX" href="/es/">ES</a>'
+contains es/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href="/">EN</a>'
+contains es/about/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href="/about/">EN</a>'
+contains es/index.html '<nav class="site-nav lang-switch" aria-label="Idioma">'
+
 exit $fail

@@ -109,6 +109,7 @@ a.page-link, .wordmark, .btn{ text-decoration:none; }
   font-family:var(--font-ui); font-size:14px; font-weight:600; color:var(--muted);
 }
 .site-nav .page-link:hover{ color:var(--accent); }
+.site-nav [aria-current]{ color:var(--ink); }
 
 /* ---------- theme toggle ---------- */
 .theme-toggle{

@@ -18,6 +18,17 @@
         </nav>
       {%- endif -%}
 
+      <nav class="site-nav lang-switch" aria-label="{{ s.lang_label }}">
+        {%- for lang in site.languages -%}
+          {%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif -%}
+          {%- if lang == site.active_lang -%}
+          <span class="page-link" lang="{{ site.data.locales[lang] }}" aria-current="true">{{ lang | upcase }}</span>
+          {%- else -%}
+          <a class="page-link" lang="{{ site.data.locales[lang] }}" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ prefix }}{{ page.url }}"{% endstatic_href %}>{{ lang | upcase }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
       <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="{{ s.toggle_to_dark }}" data-label-dark="{{ s.toggle_to_dark }}" data-label-light="{{ s.toggle_to_light }}">
         <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 5a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1Zm0 17a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1ZM4.222 5.636a1 1 0 0 1-1.414-1.414l1.414-1.415a1 1 0 1 1 1.415 1.415L4.222 5.636Zm14.142 14.142a1 1 0 0 1-1.414-1.414l1.414-1.415a1 1 0 0 1 1.415 1.415l-1.415 1.414ZM2 13a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2H2Zm18 0a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2h-2ZM4.222 18.364l1.415-1.415a1 1 0 1 1 1.414 1.415l-1.414 1.414a1 1 0 0 1-1.415-1.414ZM18.364 4.222l1.415-1.415a1 1 0 0 1 1.414 1.415l-1.414 1.414a1 1 0 1 1-1.415-1.414ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/>
