@@ -1,15 +1,18 @@
 title: Alex Ross Study Blog
-email: ross@rosslopez.rocks
+email: ross@ross-lopez.rocks
 
 description: >- # this means to ignore newlines until "baseurl:"
   Writing about my experiences in Coding, Programming Interview questions and the explanations on the answers I came up with.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://blog.rosslopez.rocks" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.ross-lopez.rocks" # the base hostname & protocol for your site, e.g. https://example.com
 twitter_username: _lexRoss
 github_username:  alex-ross83
 
 # Build settings
 theme: minima
+show_excerpts: true
+header_pages:
+  - about.markdown
 plugins:
   - jekyll-feed
 
@@ -32,3 +35,7 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+exclude:
+  - graphify-out/
+  - Gemfile
+  - Gemfile.lock

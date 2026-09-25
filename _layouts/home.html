@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<div class="home">
+  <div class="home-intro">
+    {%- if page.title -%}
+      <h1 class="home-title">{{ page.title }}</h1>
+    {%- endif -%}
+    {{ content }}
+  </div>
+
+  {%- if site.posts.size > 0 -%}
+    <div class="sec-head">
+      <span class="kicker">{{ page.list_title | default: "Latest" }}</span>
+    </div>
+    <ul class="feed">
+      {%- for post in site.posts -%}
+      <li class="feed-post">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {%- assign category = post.categories | first -%}
+        <span class="feed-kicker">{%- if category -%}{{ category | capitalize }} · {% endif -%}{{ post.date | date: date_format }}</span>
+        <h2 class="feed-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h2>
+        {%- if site.show_excerpts -%}
+          <p class="feed-dek">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+</div>
