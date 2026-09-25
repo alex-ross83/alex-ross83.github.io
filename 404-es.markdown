@@ -1,0 +1,11 @@
+---
+permalink: /404.html
+layout: page
+title: 404
+lang: es
+page_id: "404"
+---
+
+**Página no encontrada :(**
+
+No se pudo encontrar la página solicitada.

@@ -32,4 +32,15 @@ contains es/index.html 'href="/assets/main.css"'
 contains es/$P1 'href="/assets/main.css"'
 lacks index.html 'rosslopez'
 
+echo "== Task 2: Spanish pages"
+contains about/index.html '<h1 class="post-title">About</h1>'
+contains es/about/index.html '<h1 class="post-title">Acerca de</h1>'
+contains 404.html 'Page not found'
+contains es/404.html 'Página no encontrada'
+contains es/about/index.html 'href="https://jekyllrb.com/"'
+absent es/about-es.html
+absent es/about-es/index.html
+absent about-es/index.html
+absent es/404-es.html
+
 exit $fail
