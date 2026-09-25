@@ -104,4 +104,28 @@ contains es/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href=
 contains es/about/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href="/about/">EN</a>'
 contains es/index.html '<nav class="site-nav lang-switch" aria-label="Idioma">'
 
+echo "== Final review fixes"
+# Finding 1: og:url / JSON-LD url point at the /es/ URL on Spanish pages, English pages unaffected
+contains "es/$P1" 'og:url" content="https://blog.ross-lopez.rocks/es/'"$P1"'"'
+lacks "es/$P1" '"url":"https://blog.ross-lopez.rocks/'"$P1"'"'
+contains es/index.html 'og:url" content="https://blog.ross-lopez.rocks/es/"'
+contains "$P1" 'og:url" content="https://blog.ross-lopez.rocks/'"$P1"'"'
+lacks "es/$P1" 'blog.ross-lopez.rocks/es/es/'
+
+# Finding 2: og:locale is en_US on English pages, es_MX on Spanish pages (incl. pages with no lang front matter)
+contains index.html 'og:locale" content="en_US"'
+contains es/index.html 'og:locale" content="es_MX"'
+contains "$P1" 'og:locale" content="en_US"'
+contains "es/$P1" 'og:locale" content="es_MX"'
+
+# Finding 3: Spanish readers stay in /es/, no cross-language leakage
+contains "es/$P1" 'back-link" href="/es/"'
+contains es/index.html "href=\"/es/$P1\""
+contains es/index.html 'href="/es/feed.xml">vía RSS'
+contains es/feed.xml "/es/$P1"
+lacks feed.xml 'Problema de'
+same_count index.html es/index.html 'class="feed-post"'
+lacks index.html 'Problema de código'
+contains es/about/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/about/"'
+
 exit $fail

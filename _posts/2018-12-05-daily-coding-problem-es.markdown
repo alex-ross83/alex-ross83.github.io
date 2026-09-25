@@ -8,7 +8,7 @@ slug: daily-coding-problem
 page_id: daily-coding-problem-3
 ---
 
-Me tardé un poco más, pero aquí está un nuevo problema para resolver!
+Me tardé un poco más, pero ¡aquí está un nuevo problema para resolver!
 
 > Dado el nodo raíz de un árbol binario, implementa serialize(root), que serializa el árbol en un string, y deserialize(s), que deserializa el string de vuelta al árbol.
 >

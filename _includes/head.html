@@ -11,7 +11,19 @@
     } catch (e) {}
   })();
   </script>
-  {%- seo -%}
+  {%- capture seo_out -%}{% seo %}{%- endcapture -%}
+  {%- if site.active_lang != site.default_lang -%}
+    {%- assign seo_from = '"' | append: site.url | append: page.url | append: '"' -%}
+    {%- assign seo_to = '"' | append: site.url | append: '/' | append: site.active_lang | append: page.url | append: '"' -%}
+    {%- assign seo_out = seo_out | replace: seo_from, seo_to -%}
+  {%- endif -%}
+  {%- assign seo_locale_code = site.data.locales[site.active_lang] | replace: '-', '_' -%}
+  {%- assign seo_locale_to = 'og:locale" content="' | append: seo_locale_code | append: '"' -%}
+  {%- assign seo_locale_from_default = 'og:locale" content="en_US"' -%}
+  {%- assign seo_locale_from_short = 'og:locale" content="' | append: site.active_lang | append: '"' -%}
+  {%- assign seo_out = seo_out | replace: seo_locale_from_default, seo_locale_to -%}
+  {%- assign seo_out = seo_out | replace: seo_locale_from_short, seo_locale_to -%}
+  {{ seo_out }}
   {%- for lang in site.languages -%}
     {%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif %}
   <link rel="alternate" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ site.url }}{{ prefix }}{{ page.url }}"{% endstatic_href %}>
