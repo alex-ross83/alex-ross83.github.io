@@ -72,8 +72,11 @@ contains "es/$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/es/$P1
 contains "$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/$P1\""
 
 echo "== Task 5: UI strings"
-contains index.html '<span class="eyebrow">Daily coding practice</span>'
-contains es/index.html '<span class="eyebrow">Práctica diaria de código</span>'
+contains index.html '<span class="eyebrow">AI, code &amp; quick starts</span>'
+contains es/index.html '<span class="eyebrow">IA, código y guías rápidas</span>'
+contains index.html '<span class="site-title">Rosipedia</span>'
+contains es/index.html '<span class="site-title">Rosipedia</span>'
+lacks index.html 'Study Blog'
 contains es/index.html '<span class="kicker">Últimas entradas</span>'
 contains es/index.html 'Suscribirse <a'
 contains es/index.html '>vía RSS</a>'

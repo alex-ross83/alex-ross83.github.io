@@ -2,7 +2,7 @@
 <header class="masthead" role="banner">
   <div class="wrap masthead-row">
     <a class="wordmark" rel="author" href="{{ "/" | relative_url }}">
-      <span class="eyebrow">{{ s.eyebrow }}</span>
+      <span class="eyebrow">{{ s.eyebrow | escape }}</span>
       <span class="site-title">{{ site.title | escape }}</span>
     </a>
 
