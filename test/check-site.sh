@@ -50,6 +50,7 @@ for P in "$P1" "$P2" "$P3" "$P4"; do
   same_count "$P" "es/$P" '<pre'
   same_count "$P" "es/$P" '<code'
   same_count "$P" "es/$P" 'href="http'
+  lacks "es/$P" '&lt;/content&gt;'
   n=$((n+1))
 done
 contains "$P1" 'itemprop="name headline">Daily Coding Problem # 1</h1>'

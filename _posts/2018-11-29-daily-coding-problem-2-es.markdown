@@ -97,4 +97,3 @@ La corrida manual se vería así, recordando que en cada iteración no multiplic
 Eso es todo por hoy. Recuerda estar al pendiente de los casos extremos cuando intentes resolver tus problemas, porque estos pueden cambiar la forma en que funciona la solución, y siempre haz preguntas para aclarar dudas. Si un entrevistador me hubiera dicho que no me preocupara por los ceros, la primera solución habría funcionado sin problemas, pero pensar en casos especiales puede llevar a cambios de diseño en nuestro algoritmo.
 
 > Na lû e-govaned 'wîn
-</content>

@@ -12,10 +12,10 @@ Esta es mi versión de los ejercicios que llegan al suscribirte a [Daily Coding 
 
 El problema de hoy es:
 
-> Given a list of numbers, return whether any two sums to k.
-> For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+> Dada una lista de números, regresa si dos de ellos suman k.
+> Por ejemplo, dado [10, 15, 3, 7] y k de 17, regresa true ya que 10 + 7 es 17.
 >
-> Bonus: Can you do this in one pass?
+> Extra: ¿Puedes hacerlo en una sola pasada?
 
 #### Solución
 
@@ -72,4 +72,3 @@ El truco aquí es usar una estructura de datos que te permita revisar valores gu
 
 
 > Na lû e-govaned 'wîn
-</content>

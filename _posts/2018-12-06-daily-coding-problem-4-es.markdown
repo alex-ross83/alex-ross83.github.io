@@ -52,4 +52,3 @@ Aquí nos saltamos un poco las reglas, primero usando un método integrado (buil
 Ya explicamos cómo llegamos a nuestra solución y también te recomiendo hacer preguntas para aclarar dudas. A algunas personas, como a mí, se nos complican de más las soluciones, pero dado el tiempo que tienes disponible en una sola sesión de entrevista, está totalmente bien preguntar de vez en cuando si se puede usar un método integrado, siempre y cuando sepas cómo funciona. Además, estoy bastante seguro de que el equipo con el que estás entrevistando no está usando puras operaciones de ordenamiento desarrolladas internamente, pero bueno, podría estar equivocado, ¡así que nomás pregunta!
 
 > Na lû e-govaned 'wîn
-</content>
