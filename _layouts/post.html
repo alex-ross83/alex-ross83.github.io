@@ -16,7 +16,8 @@ layout: default
       {%- assign total = series_posts.size | append: "" %}
     <a class="kicker" href="{{ "/series/" | relative_url }}#{{ page.series }}">{{ series.title | escape }} · {{ s.series_part | replace: "%n", part | replace: "%t", total }}</a>
     {%- else %}
-    <span class="kicker">{%- if category -%}{{ category | capitalize }}{%- else -%}{{ s.post_kicker_fallback }}{%- endif -%}</span>
+    {%- assign sec = site.data.sections[page.section] %}
+    <span class="kicker">{%- if sec -%}{{ sec.title[site.active_lang] | default: sec.title.en | escape }}{%- elsif category -%}{{ category | capitalize }}{%- else -%}{{ s.post_kicker_fallback }}{%- endif -%}</span>
     {%- endif %}
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
