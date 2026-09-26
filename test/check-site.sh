@@ -221,4 +221,16 @@ card_has   es/index.html coding "href=\"/es/$P4\""
 card_lacks es/index.html coding "href=\"/es/$P1\""
 card_lacks index.html coding 'First post coming soon.'
 
+echo "== Signal styles"
+for f in index.html es/index.html "$P1" "es/$P1" about/index.html es/about/index.html series/index.html 404.html; do
+  contains "$f" 'family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap'
+  lacks "$f" 'Literata'
+done
+contains assets/main.css 'Manrope'
+contains assets/main.css '#5F4FCF'
+contains assets/main.css '#8E8CF5'
+lacks assets/main.css 'Literata'
+# Rouge wraps {% highlight %} in <figure>; its UA 40px margin must be reset so code aligns with text
+contains assets/main.css '.post-content figure'
+
 exit $fail
