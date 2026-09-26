@@ -2,35 +2,82 @@
 layout: default
 ---
 {%- assign s = site.data[site.active_lang].strings | default: site.data.en.strings -%}
+{%- assign lang = site.active_lang -%}
+{%- assign newest = site.posts | first -%}
 
 <div class="home">
-  <div class="home-intro">
-    {%- if page.title -%}
-      <h1 class="home-title">{{ page.title }}</h1>
-    {%- endif -%}
-    {{ content }}
-  </div>
+  <section class="hero">
+    <span class="kicker">{{ s.hero_kicker | escape }}</span>
+    <h1 class="hero-title">{{ s.hero_title | escape }}</h1>
+    <p class="hero-pitch">{{ s.hero_pitch | escape }}</p>
+    <div class="hero-actions">
+      {%- if newest %}
+      <a class="btn btn-cta" href="{{ newest.url | relative_url }}">{{ s.cta_latest | escape }}</a>
+      {%- endif %}
+      <a class="btn btn-ghost" href="{{ "/series/" | relative_url }}">{{ s.cta_series | escape }}</a>
+    </div>
+  </section>
 
-  {%- if site.posts.size > 0 -%}
+  {%- if site.posts.size > 0 %}
+  <section class="home-latest">
     <div class="sec-head">
       <span class="kicker">{{ page.list_title | default: s.latest }}</span>
     </div>
     <ul class="feed">
-      {%- for post in site.posts -%}
+      {%- for post in site.posts limit: 5 -%}
+      {%- assign sec = site.data.sections[post.section] -%}
+      {%- assign series = site.data.series[post.series] -%}
+      {%- assign category = post.categories | first %}
       <li class="feed-post">
-        {%- assign category = post.categories | first -%}
-        {%- assign series = site.data.series[post.series] -%}
-        <span class="feed-kicker">{%- if series -%}{{ series.title | escape }} · {% elsif category -%}{{ category | capitalize }} · {% endif -%}{% include i18n_date.html date=post.date %}</span>
-        <h2 class="feed-title">
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-        {%- if site.show_excerpts -%}
-          <p class="feed-dek">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
-        {%- endif -%}
+        <span class="feed-kicker">
+          {%- if sec -%}
+            {{ sec.title[lang] | default: sec.title.en | escape }}{% if series %} · {{ series.title | escape }}{% endif %}
+          {%- elsif series -%}
+            {{ series.title | escape }}
+          {%- elsif category -%}
+            {{ category | capitalize }}
+          {%- else -%}
+            {{ s.post_kicker_fallback }}
+          {%- endif -%}
+        </span>
+        <h2 class="feed-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+        {%- if site.show_excerpts %}
+        <p class="feed-dek">{{ post.excerpt | strip_html | truncatewords: 24 }}</p>
+        {%- endif %}
+        <span class="feed-meta">{% include i18n_date.html date=post.date %}</span>
       </li>
-      {%- endfor -%}
+      {%- endfor %}
     </ul>
+  </section>
+  {%- endif %}
 
-    <p class="rss-subscribe">{{ s.subscribe }} <a href="{{ "/feed.xml" | relative_url }}">{{ s.via_rss }}</a></p>
-  {%- endif -%}
+  <section class="home-sections" id="sections">
+    <div class="sec-head">
+      <span class="kicker">{{ s.sections }}</span>
+    </div>
+    <div class="section-grid">
+      {%- for entry in site.data.sections -%}
+      {%- assign key = entry[0] -%}
+      {%- assign sec = entry[1] -%}
+      {%- assign sec_posts = site.posts | where: "section", key -%}
+      {%- assign n = sec_posts.size | append: "" %}
+      <article class="section-card" data-section="{{ key }}">
+        <h2 class="kicker section-title">{{ sec.title[lang] | default: sec.title.en | escape }}</h2>
+        <p class="section-desc">{{ sec.description[lang] | default: sec.description.en | escape }}</p>
+        {%- if sec_posts.size > 0 %}
+        <span class="section-count">{% if sec_posts.size == 1 %}{{ s.post_count_one }}{% else %}{{ s.post_count | replace: "%n", n }}{% endif %}</span>
+        <ul class="section-posts">
+          {%- for post in sec_posts limit: 3 %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- else %}
+        <p class="section-empty">{{ s.coming_soon }}</p>
+        {%- endif %}
+      </article>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <p class="rss-subscribe">{{ s.subscribe }} <a href="{{ "/feed.xml" | relative_url }}">{{ s.via_rss }}</a></p>
 </div>

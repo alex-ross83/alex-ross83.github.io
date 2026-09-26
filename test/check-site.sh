@@ -17,6 +17,17 @@ same_count() {
   b=$(grep -oF -- "$3" "$SITE/$2" 2>/dev/null | wc -l | tr -d ' ')
   [ "$a" = "$b" ] && pass "same count of '$3' ($a) in $1 and $2" || bad "count of '$3': $1=$a $2=$b"
 }
+count_is() {
+  local n
+  n=$(grep -oF -- "$2" "$SITE/$1" 2>/dev/null | wc -l | tr -d ' ')
+  [ "$n" = "$3" ] && pass "$1 has '$2' x$3" || bad "$1 has '$2' x$n, want $3"
+}
+# card_match FILE KEY NEEDLE -> 0 if the <article data-section="KEY"> in FILE contains NEEDLE
+card_match() {
+  KEY="$2" NEEDLE="$3" perl -0ne 'exit(!(/data-section="\Q$ENV{KEY}\E"(.*?)<\/article>/s && index($1, $ENV{NEEDLE}) >= 0))' "$SITE/$1" 2>/dev/null
+}
+card_has()   { card_match "$1" "$2" "$3" && pass "$1 card $2 has: $3" || bad "$1 card $2 lacks: $3"; }
+card_lacks() { card_match "$1" "$2" "$3" && bad "$1 card $2 should not have: $3" || pass "$1 card $2 free of: $3"; }
 
 P1=coding/problem/2018/11/28/daily-coding-problem-1.html
 P2=coding/problem/2018/11/29/daily-coding-problem-2.html
@@ -92,10 +103,10 @@ contains index.html '<title>Rosipedia | Bite-sized takes on AI, coding problems,
 lacks index.html 'Programming Interview questions'
 
 echo "== Task 6: dates"
-contains index.html 'feed-kicker">Daily Coding Problem · Nov 28, 2018'
-contains index.html 'feed-kicker">Daily Coding Problem · Dec 5, 2018'
-contains es/index.html 'feed-kicker">Daily Coding Problem · 28 nov 2018'
-contains es/index.html 'feed-kicker">Daily Coding Problem · 5 dic 2018'
+contains index.html 'feed-meta">Nov 28, 2018</span>'
+contains index.html 'feed-meta">Dec 5, 2018</span>'
+contains es/index.html 'feed-meta">28 nov 2018</span>'
+contains es/index.html 'feed-meta">5 dic 2018</span>'
 contains "es/$P1" '28 nov 2018'
 contains "$P1" 'Nov 28, 2018'
 lacks es/index.html 'Nov 28, 2018'
@@ -165,5 +176,49 @@ contains "es/$P2" "rel=\"prev\" href=\"/es/$P1\""
 contains "es/$P2" "rel=\"next\" href=\"/es/$P3\""
 contains "es/$P2" '← Anterior'
 contains "$P2" 'Next →'
+
+echo "== Signal home: hero"
+for f in index.html es/index.html; do
+  contains "$f" '<section class="hero">'
+done
+contains index.html    "class=\"btn btn-cta\" href=\"/$P4\""
+contains es/index.html "class=\"btn btn-cta\" href=\"/es/$P4\""
+contains index.html    'class="btn btn-ghost" href="/series/"'
+contains es/index.html 'class="btn btn-ghost" href="/es/series/"'
+contains index.html    '<h1 class="hero-title">Bite-sized takes on AI and code</h1>'
+contains es/index.html '<h1 class="hero-title">Ideas breves sobre IA y código</h1>'
+contains index.html    'Read the latest →'
+contains es/index.html 'Lee lo más reciente →'
+contains index.html    'All series</a>'
+contains es/index.html 'Todas las series</a>'
+
+echo "== Signal home: latest feed"
+contains index.html    'feed-kicker">Coding problems · Daily Coding Problem</span>'
+contains es/index.html 'feed-kicker">Problemas de programación · Daily Coding Problem</span>'
+
+echo "== Signal home: sections"
+for f in index.html es/index.html; do
+  count_is "$f" 'class="section-card"' 4
+  order=$(grep -o 'data-section="[^"]*"' "$SITE/$f" 2>/dev/null | tr '\n' ' ')
+  [ "$order" = 'data-section="ai" data-section="quick-starts" data-section="tips-news" data-section="coding" ' ] \
+    && pass "$f section order" || bad "$f section order: $order"
+  contains "$f" 'id="sections"'
+done
+contains index.html    '<span class="kicker">Sections</span>'
+contains es/index.html '<span class="kicker">Secciones</span>'
+count_is index.html    'First post coming soon.' 3
+count_is es/index.html 'Primera entrada muy pronto.' 3
+contains index.html    'Tips &amp; news'
+contains es/index.html 'Tips y noticias'
+card_has   index.html ai 'First post coming soon.'
+card_has   es/index.html ai 'Primera entrada muy pronto.'
+card_has   index.html coding '4 posts'
+card_has   es/index.html coding '4 entradas'
+card_has   index.html coding "href=\"/$P4\""
+card_has   index.html coding "href=\"/$P2\""
+card_lacks index.html coding "href=\"/$P1\""
+card_has   es/index.html coding "href=\"/es/$P4\""
+card_lacks es/index.html coding "href=\"/es/$P1\""
+card_lacks index.html coding 'First post coming soon.'
 
 exit $fail

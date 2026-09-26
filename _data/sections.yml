@@ -1,0 +1,22 @@
+# One entry per home-page section, in display order.
+# Posts join a section with `section: <key>` in their front matter.
+ai:
+  title: { en: "AI", es: "IA" }
+  description:
+    en: "What's new, what's useful, and what's just hype."
+    es: "Lo nuevo, lo útil y lo que solo es hype."
+quick-starts:
+  title: { en: "Quick starts", es: "Guías rápidas" }
+  description:
+    en: "Get up and running with new tools in minutes."
+    es: "Empieza a usar herramientas nuevas en minutos."
+tips-news:
+  title: { en: "Tips & news", es: "Tips y noticias" }
+  description:
+    en: "Short notes from the world of software."
+    es: "Notas breves del mundo del software."
+coding:
+  title: { en: "Coding problems", es: "Problemas de programación" }
+  description:
+    en: "Worked solutions to interview-style problems, with the reasoning."
+    es: "Soluciones a problemas tipo entrevista, con el razonamiento."
