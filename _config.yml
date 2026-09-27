@@ -8,6 +8,10 @@ url: "https://blog.ross-lopez.rocks" # the base hostname & protocol for your sit
 timezone: Etc/UTC
 twitter_username: _lexRoss
 github_username:  alex-ross83
+# jekyll-seo-tag reads this nested hash for the twitter:site meta tag (same handle as
+# twitter_username above, which minima's footer social link uses).
+twitter:
+  username: _lexRoss
 # Search Console ownership check; jekyll-seo-tag prints it as a meta tag on every page.
 webmaster_verifications:
   google: hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A

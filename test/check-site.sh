@@ -385,6 +385,15 @@ lacks_re "$P4" 'Daily Coding Problem # '
 # URLs/permalinks are untouched: the same P1-P4 paths still resolve (Task 1 already asserts this)
 exists "$P1"; exists "$P2"; exists "$P3"; exists "$P4"
 
+echo "== Footer X label and twitter:site (audit S7)"
+for f in index.html es/index.html; do
+  contains "$f" 'href="https://www.twitter.com/_lexRoss"'
+  contains "$f" '<span class="x-icon" aria-hidden="true">X</span> <span class="username">_lexRoss</span>'
+  lacks "$f" 'minima-social-icons.svg#twitter'
+  contains "$f" '<meta name="twitter:site" content="@_lexRoss" />'
+done
+contains assets/main.css '.x-icon'
+
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
   contains "$f" '<meta name="google-site-verification" content="hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A" />'

@@ -272,6 +272,7 @@ a.kicker:hover{ text-decoration:underline; }
 .social-media-list li a{ display:flex; align-items:center; min-height:44px; gap:6px; color:var(--muted); font-size:.8125rem; }
 .social-media-list li a:hover{ color:var(--accent); }
 .social-media-list .svg-icon{ width:15px; height:15px; fill:currentColor; }
+.social-media-list .x-icon{ width:15px; font-family:var(--font); font-weight:800; font-size:.8125rem; line-height:1; text-align:center; }
 
 /* Breakpoints are in em so a larger default text size also switches to the phone layout. */
 @media (max-width:40em){
