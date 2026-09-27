@@ -27,6 +27,22 @@
   {%- assign seo_locale_from_short = 'og:locale" content="' | append: site.active_lang | append: '"' -%}
   {%- assign seo_out = seo_out | replace: seo_locale_from_default, seo_locale_to -%}
   {%- assign seo_out = seo_out | replace: seo_locale_from_short, seo_locale_to -%}
+  {%- if page.url == "/" -%}
+    {%- comment -%} Give the home page a short, explicit title instead of jekyll-seo-tag's
+    "site title | site description" (86 characters, truncated by Google). {%- endcomment -%}
+    {%- assign home_title = site.data[site.active_lang].strings.home_title -%}
+    {%- if home_title -%}
+      {%- assign seo_desc = seo_out | split: '<meta name="description" content="' | last | split: '" />' | first -%}
+      {%- assign title_from = site.title | append: ' | ' | append: seo_desc -%}
+      {%- assign seo_out = seo_out | replace: title_from, home_title -%}
+      {%- assign ogtitle_from = 'og:title" content="' | append: site.title | append: '"' -%}
+      {%- assign ogtitle_to = 'og:title" content="' | append: home_title | append: '"' -%}
+      {%- assign seo_out = seo_out | replace: ogtitle_from, ogtitle_to -%}
+      {%- assign twtitle_from = 'twitter:title" content="' | append: site.title | append: '"' -%}
+      {%- assign twtitle_to = 'twitter:title" content="' | append: home_title | append: '"' -%}
+      {%- assign seo_out = seo_out | replace: twtitle_from, twtitle_to -%}
+    {%- endif -%}
+  {%- endif -%}
   {{ seo_out }}
   {%- for lang in site.languages -%}
     {%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif %}

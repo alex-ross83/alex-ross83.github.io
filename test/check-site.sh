@@ -106,7 +106,6 @@ contains index.html '<a class="page-link" href="/about/">About</a>'
 contains es/index.html '<a class="page-link" href="/es/about/">Acerca de</a>'
 contains es/index.html '<p class="footer-desc">Contenido breve sobre IA, problemas de programación, guías rápidas, tips y noticias de tecnología.</p>'
 contains index.html '<p class="footer-desc">Bite-sized takes on AI, coding problems, quick starts, tips and tech news.</p>'
-contains index.html '<title>Rosipedia | Bite-sized takes on AI, coding problems, quick starts, tips and tech news.</title>'
 lacks index.html 'Programming Interview questions'
 
 echo "== Task 6: dates"
@@ -287,7 +286,6 @@ for f in es/index.html es/about/index.html es/series/index.html es/404.html; do
   contains "$f" "property=\"og:description\" content=\"$ES_DESC\""
   contains "$f" "\"description\":\"$ES_DESC\""
 done
-contains es/index.html "<title>Rosipedia | $ES_DESC</title>"
 for f in index.html about/index.html series/index.html 404.html; do
   contains "$f" "<meta name=\"description\" content=\"$EN_DESC\""
 done
@@ -302,6 +300,16 @@ for f in index.html es/index.html about/index.html es/about/index.html "$P1" "es
   contains "$f" '<link rel="icon" href="/favicon.ico" sizes="32x32">'
   contains "$f" '<link rel="apple-touch-icon" href="/apple-touch-icon.png">'
 done
+
+echo "== Short home title (audit S3)"
+contains index.html '<title>Rosipedia: bite-sized takes on AI and code</title>'
+contains es/index.html '<title>Rosipedia: microideas sobre IA y código</title>'
+contains index.html 'og:title" content="Rosipedia: bite-sized takes on AI and code"'
+contains es/index.html 'og:title" content="Rosipedia: microideas sobre IA y código"'
+contains index.html 'twitter:title" content="Rosipedia: bite-sized takes on AI and code"'
+contains es/index.html 'twitter:title" content="Rosipedia: microideas sobre IA y código"'
+lacks index.html 'Rosipedia: bite-sized takes on AI and code | Rosipedia'
+lacks es/index.html 'Rosipedia: microideas sobre IA y código | Rosipedia'
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
