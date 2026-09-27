@@ -303,4 +303,9 @@ for f in index.html es/index.html about/index.html es/about/index.html "$P1" "es
   contains "$f" '<link rel="apple-touch-icon" href="/apple-touch-icon.png">'
 done
 
+echo "== Google Search Console verification"
+for f in index.html es/index.html; do
+  contains "$f" '<meta name="google-site-verification" content="hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A" />'
+done
+
 exit $fail

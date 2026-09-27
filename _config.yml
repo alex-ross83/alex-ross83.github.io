@@ -8,6 +8,9 @@ url: "https://blog.ross-lopez.rocks" # the base hostname & protocol for your sit
 timezone: Etc/UTC
 twitter_username: _lexRoss
 github_username:  alex-ross83
+# Search Console ownership check; jekyll-seo-tag prints it as a meta tag on every page.
+webmaster_verifications:
+  google: hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A
 
 # Build settings
 theme: minima
