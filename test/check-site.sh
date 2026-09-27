@@ -292,4 +292,15 @@ for f in index.html about/index.html series/index.html 404.html; do
   contains "$f" "<meta name=\"description\" content=\"$EN_DESC\""
 done
 
+echo "== Favicon (audit S2)"
+exists favicon.svg
+exists favicon.ico
+exists apple-touch-icon.png
+absent es/favicon.svg
+for f in index.html es/index.html about/index.html es/about/index.html "$P1" "es/$P1" 404.html es/404.html; do
+  contains "$f" '<link rel="icon" href="/favicon.svg" type="image/svg+xml">'
+  contains "$f" '<link rel="icon" href="/favicon.ico" sizes="32x32">'
+  contains "$f" '<link rel="apple-touch-icon" href="/apple-touch-icon.png">'
+done
+
 exit $fail

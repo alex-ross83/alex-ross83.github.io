@@ -27,6 +27,9 @@ exclude_from_localization:
   - "CNAME"
   - "sitemap.xml"   # one bilingual sitemap at the root
   - "robots.txt"
+  - "favicon.svg"   # icons live once, at the root
+  - "favicon.ico"
+  - "apple-touch-icon.png"
 parallel_localization: true
 
 sass:
