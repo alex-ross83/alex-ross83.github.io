@@ -2,6 +2,7 @@
 permalink: /404.html
 layout: page
 title: 404
+description: "This page does not exist on Rosipedia. Check the URL or head back to the home page."
 lang: en
 page_id: "404"
 ---

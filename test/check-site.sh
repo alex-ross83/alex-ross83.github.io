@@ -282,13 +282,11 @@ EN_DESC='Bite-sized takes on AI, coding problems, quick starts, tips and tech ne
 ES_DESC='Contenido breve sobre IA, problemas de programación, guías rápidas, tips y noticias de tecnología.'
 for f in es/index.html es/about/index.html es/series/index.html es/404.html; do
   lacks "$f" "$EN_DESC"
-  contains "$f" "<meta name=\"description\" content=\"$ES_DESC\""
-  contains "$f" "property=\"og:description\" content=\"$ES_DESC\""
-  contains "$f" "\"description\":\"$ES_DESC\""
 done
-for f in index.html about/index.html series/index.html 404.html; do
-  contains "$f" "<meta name=\"description\" content=\"$EN_DESC\""
-done
+contains es/index.html "<meta name=\"description\" content=\"$ES_DESC\""
+contains es/index.html "property=\"og:description\" content=\"$ES_DESC\""
+contains es/index.html "\"description\":\"$ES_DESC\""
+contains index.html "<meta name=\"description\" content=\"$EN_DESC\""
 
 echo "== Favicon (audit S2)"
 exists favicon.svg
@@ -310,6 +308,29 @@ contains index.html 'twitter:title" content="Rosipedia: bite-sized takes on AI a
 contains es/index.html 'twitter:title" content="Rosipedia: microideas sobre IA y código"'
 lacks index.html 'Rosipedia: bite-sized takes on AI and code | Rosipedia'
 lacks es/index.html 'Rosipedia: microideas sobre IA y código | Rosipedia'
+
+echo "== Unique page descriptions (audit S4)"
+ABOUT_EN='Meet Alex-Ross: a dad, gamer and builder of Rosipedia, a bilingual blog on AI, quick starts, tips and coding problems.'
+ABOUT_ES='Conoce a Alex-Ross: papá, gamer y creador de Rosipedia, un blog bilingüe sobre IA, guías rápidas, tips y problemas de programación.'
+SERIES_EN='Every multi-part series on Rosipedia, in order, including the Daily Coding Problem walkthroughs.'
+SERIES_ES='Todas las series de varias partes en Rosipedia, en orden, incluyendo las soluciones de Daily Coding Problem.'
+NOTFOUND_EN='This page does not exist on Rosipedia. Check the URL or head back to the home page.'
+NOTFOUND_ES='Esta página no existe en Rosipedia. Revisa la URL o regresa al inicio del sitio.'
+contains about/index.html "<meta name=\"description\" content=\"$ABOUT_EN\""
+contains es/about/index.html "<meta name=\"description\" content=\"$ABOUT_ES\""
+contains series/index.html "<meta name=\"description\" content=\"$SERIES_EN\""
+contains es/series/index.html "<meta name=\"description\" content=\"$SERIES_ES\""
+contains 404.html "<meta name=\"description\" content=\"$NOTFOUND_EN\""
+contains es/404.html "<meta name=\"description\" content=\"$NOTFOUND_ES\""
+# each page's <meta description> must differ from the generic site description
+lacks about/index.html "<meta name=\"description\" content=\"$EN_DESC\""
+lacks series/index.html "<meta name=\"description\" content=\"$EN_DESC\""
+lacks 404.html "<meta name=\"description\" content=\"$EN_DESC\""
+lacks es/about/index.html "<meta name=\"description\" content=\"$ES_DESC\""
+lacks es/series/index.html "<meta name=\"description\" content=\"$ES_DESC\""
+lacks es/404.html "<meta name=\"description\" content=\"$ES_DESC\""
+contains es/series/index.html '<html lang="es-MX">'
+contains es/series/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href="/series/">EN</a>'
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do

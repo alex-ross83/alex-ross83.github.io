@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+description: "Meet Alex-Ross: a dad, gamer and builder of Rosipedia, a bilingual blog on AI, quick starts, tips and coding problems."
 permalink: /about/
 lang: en
 page_id: about

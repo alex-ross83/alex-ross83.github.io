@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Acerca de
+description: "Conoce a Alex-Ross: papá, gamer y creador de Rosipedia, un blog bilingüe sobre IA, guías rápidas, tips y problemas de programación."
 permalink: /about/
 lang: es
 page_id: about
