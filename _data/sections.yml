@@ -1,22 +1,28 @@
 # One entry per home-page section, in display order.
 # Posts join a section with `section: <key>` in their front matter.
+# `path` is the URL word for new posts: /entries/<path.en>/<slug>/ and
+# /es/entradas/<path.es>/<slug-es>/. Never change a path once a post uses it.
 ai:
   title: { en: "AI", es: "IA" }
+  path:  { en: "ai", es: "ia" }
   description:
     en: "What's new, what's useful, and what's just hype."
     es: "Lo nuevo, lo útil y lo que solo es hype."
 quick-starts:
   title: { en: "Quick starts", es: "Guías rápidas" }
+  path:  { en: "quick-starts", es: "guias-rapidas" }
   description:
     en: "Get up and running with new tools in minutes."
     es: "Empieza a usar herramientas nuevas en minutos."
 tips-news:
   title: { en: "Tips & news", es: "Tips y noticias" }
+  path:  { en: "tips-news", es: "tips-noticias" }
   description:
     en: "Short notes from the world of software."
     es: "Notas breves del mundo del software."
 coding:
   title: { en: "Coding problems", es: "Problemas de programación" }
+  path:  { en: "coding", es: "programacion" }
   description:
     en: "Worked solutions to interview-style problems, with the reasoning."
     es: "Soluciones a problemas de tipo entrevista técnica con explicaciones."

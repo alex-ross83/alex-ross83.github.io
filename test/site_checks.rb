@@ -106,8 +106,70 @@ def check_home
   end
 end
 
+# New-style posts (those with permalink:) must use their section's localized path, carry a
+# description, and have a twin in the other language with the same page_id.
+def check_post_urls
+  styled = posts.select { |p| p[:data]["permalink"] }
+  return ok("no posts with a custom permalink yet") if styled.empty?
+
+  styled.each do |p|
+    d = p[:data]
+    lang = post_lang(p)
+    path = SECTIONS.dig(d["section"].to_s, "path", lang)
+    unless path
+      bad("#{p[:file]}: section '#{d["section"]}' has no #{lang} path in _data/sections.yml")
+      next
+    end
+    re = %r{\A/#{ROOT_WORD[lang]}/#{Regexp.escape(path)}/[a-z0-9]+(?:-[a-z0-9]+)*/\z}
+    check(re.match?(d["permalink"].to_s), "#{p[:file]}: permalink #{d["permalink"]} matches /#{ROOT_WORD[lang]}/#{path}/<slug>/")
+    check(!d["description"].to_s.strip.empty?, "#{p[:file]}: has a description")
+    twin = styled.find { |q| q != p && q[:data]["page_id"] == d["page_id"] && post_lang(q) != lang }
+    check(!d["page_id"].to_s.empty? && !twin.nil?, "#{p[:file]}: has a twin in the other language (page_id '#{d["page_id"]}')")
+  end
+end
+
+def url_for(rel) = "/" + rel.delete_suffix("index.html")
+
+def file_for(url)
+  path = url.to_s.split(/[?#]/).first.to_s
+  return nil unless path.start_with?("/")
+  [path.end_with?("/") ? "#{path}index.html" : path, "#{path}/index.html", "#{path}.html"]
+    .map { |c| File.join(SITE, c) }.find { |f| File.file?(f) }
+end
+
+def switcher_href(html) = html[/class="page-link" lang="[^"]*" hreflang="[^"]*" href="([^"]+)"/, 1]
+
+# On every page with a language switcher: the switcher link and every hreflang link resolve
+# to a built page, the switcher round-trips, and the hreflang list includes the page itself.
+def check_lang_links
+  pages = Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
+                                            .select { |rel| File.read(File.join(SITE, rel)).include?('class="site-nav lang-switch"') }
+  return bad("no pages with a language switcher found in #{SITE}") if pages.empty?
+
+  broken = []
+  pages.each do |rel|
+    html = File.read(File.join(SITE, rel))
+    me = url_for(rel)
+    target = switcher_href(html)
+    tfile = file_for(target)
+    if tfile
+      back = switcher_href(File.read(tfile))
+      broken << "#{me}: switcher → #{target}, which links back to #{back.inspect}" unless back == me
+    else
+      broken << "#{me}: switcher → #{target.inspect} (no such page)"
+    end
+    alts = html.scan(/<link rel="alternate" hreflang="[^"]+" href="#{Regexp.escape(SITE_URL)}([^"]*)"/).flatten
+    alts.each { |h| broken << "#{me}: hreflang → #{h} (no such page)" unless file_for(h) }
+    broken << "#{me}: hreflang list is missing the page itself" unless alts.include?(me)
+  end
+  check(broken.empty?, "switcher and hreflang resolve and round-trip on #{pages.size} pages" +
+                       (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
+end
+
 case ARGV[0]
-when "home" then check_home
+when "home"       then check_home
+when "post-urls"  then check_post_urls
+when "lang-links" then check_lang_links
 else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap> [SITE_DIR]"
 end
 exit($failed ? 1 : 0)

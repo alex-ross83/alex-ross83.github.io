@@ -24,7 +24,7 @@
           {%- if lang == site.active_lang -%}
           <span class="page-link" lang="{{ site.data.locales[lang] }}" aria-current="true">{{ lang | upcase }}</span>
           {%- else -%}
-          <a class="page-link" lang="{{ site.data.locales[lang] }}" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ prefix }}{{ page.url }}"{% endstatic_href %}>{{ lang | upcase }}</a>
+          <a class="page-link" lang="{{ site.data.locales[lang] }}" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ prefix }}{{ page.permalink_lang[lang] | default: page.url }}"{% endstatic_href %}>{{ lang | upcase }}</a>
           {%- endif -%}
         {%- endfor -%}
       </nav>

@@ -249,4 +249,10 @@ contains assets/main.css 'min-height: 44px'
 lacks_re assets/main.css 'font-size: [0-9.]+px'
 lacks_re assets/main.css '--(hero|h1|title|text|read|kicker-size): *[0-9.]+px'
 
+echo "== Post URLs (new-style posts)"
+ruby "$(dirname "$0")/site_checks.rb" post-urls "$SITE" || fail=1
+
+echo "== Language links (every page)"
+ruby "$(dirname "$0")/site_checks.rb" lang-links "$SITE" || fail=1
+
 exit $fail

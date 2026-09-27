@@ -27,7 +27,8 @@
   {{ seo_out }}
   {%- for lang in site.languages -%}
     {%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif %}
-  <link rel="alternate" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ site.url }}{{ prefix }}{{ page.url }}"{% endstatic_href %}>
+    {%- assign twin = page.permalink_lang[lang] | default: page.url %}
+  <link rel="alternate" hreflang="{{ site.data.locales[lang] }}" {% static_href %}href="{{ site.url }}{{ prefix }}{{ twin }}"{% endstatic_href %}>
   {%- endfor -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
