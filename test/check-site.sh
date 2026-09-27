@@ -255,4 +255,16 @@ ruby "$(dirname "$0")/site_checks.rb" post-urls "$SITE" || fail=1
 echo "== Language links (every page)"
 ruby "$(dirname "$0")/site_checks.rb" lang-links "$SITE" || fail=1
 
+echo "== Sitemap and robots"
+exists sitemap.xml
+exists robots.txt
+absent es/sitemap.xml
+absent es/robots.txt
+contains robots.txt 'Sitemap: https://blog.ross-lopez.rocks/sitemap.xml'
+contains sitemap.xml 'xmlns:xhtml="http://www.w3.org/1999/xhtml"'
+lacks sitemap.xml '404'
+python3 -c 'import sys, xml.etree.ElementTree as E; E.parse(sys.argv[1])' "$SITE/sitemap.xml" 2>/dev/null \
+  && pass "sitemap.xml is well-formed XML" || bad "sitemap.xml is not well-formed XML"
+ruby "$(dirname "$0")/site_checks.rb" sitemap "$SITE" || fail=1
+
 exit $fail

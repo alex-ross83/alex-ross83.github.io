@@ -25,6 +25,8 @@ exclude_from_localization:
   - "assets"
   - "graphify-out"
   - "CNAME"
+  - "sitemap.xml"   # one bilingual sitemap at the root
+  - "robots.txt"
 parallel_localization: true
 
 sass:

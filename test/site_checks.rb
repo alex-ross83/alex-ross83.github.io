@@ -166,10 +166,36 @@ def check_lang_links
                        (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
 end
 
+# sitemap.xml lists every page with a language switcher (except 404s) exactly once, each with
+# one hreflang alternate per language, and every alternate resolves to a built page.
+def check_sitemap
+  path = File.join(SITE, "sitemap.xml")
+  return bad("sitemap.xml is missing") unless File.file?(path)
+
+  xml = File.read(path)
+  locs = xml.scan(%r{<loc>#{Regexp.escape(SITE_URL)}([^<]*)</loc>}).flatten
+  pages = Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
+                                            .select { |rel| File.read(File.join(SITE, rel)).include?('class="site-nav lang-switch"') }
+                                            .map { |rel| url_for(rel) }
+                                            .reject { |u| u.end_with?("404.html") }
+  check(locs.tally.values.all? { |n| n == 1 }, "sitemap has no duplicate URLs")
+  missing = pages - locs
+  extra = locs - pages
+  check(missing.empty? && extra.empty?, "sitemap lists all #{pages.size} pages (missing: #{missing.first(5)}, extra: #{extra.first(5)})")
+  broken = []
+  xml.scan(%r{<url>(.*?)</url>}m).flatten.each do |u|
+    alts = u.scan(/<xhtml:link rel="alternate" hreflang="[^"]+" href="#{Regexp.escape(SITE_URL)}([^"]*)"/).flatten
+    broken << "#{u[/<loc>([^<]*)/, 1]}: #{alts.size} alternates" unless alts.size == LANGS.size
+    alts.each { |a| broken << "alternate #{a} (no such page)" unless file_for(a) }
+  end
+  check(broken.empty?, "every sitemap URL has #{LANGS.size} resolving alternates" + (broken.empty? ? "" : ": #{broken.first(5)}"))
+end
+
 case ARGV[0]
 when "home"       then check_home
 when "post-urls"  then check_post_urls
 when "lang-links" then check_lang_links
+when "sitemap"    then check_sitemap
 else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap> [SITE_DIR]"
 end
 exit($failed ? 1 : 0)
