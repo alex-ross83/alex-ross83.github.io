@@ -368,6 +368,12 @@ contains es/index.html '<a class="skip-link" href="#main">Saltar al contenido</a
 before es/index.html '<a class="skip-link" href="#main">Saltar al contenido</a>' '<header class="masthead"'
 contains assets/main.css '.skip-link'
 
+echo "== Keyboard-scrollable code blocks (audit A4)"
+for P in "$P1" "$P2" "$P3" "$P4"; do
+  contains "$P" '<pre tabindex="0" role="region" aria-label="Code">'
+  contains "es/$P" '<pre tabindex="0" role="region" aria-label="Código">'
+done
+
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
   contains "$f" '<meta name="google-site-verification" content="hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A" />'

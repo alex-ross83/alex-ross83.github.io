@@ -30,8 +30,12 @@ layout: default
     </p>
   </header>
 
+  {%- comment -%} Rouge/kramdown emit plain <pre> for every code block; make each one a
+  keyboard-scrollable region (Safari/Firefox don't auto-focus overflow: auto boxes). {%- endcomment -%}
+  {%- assign pre_to = '<pre tabindex="0" role="region" aria-label="' | append: s.code_region | append: '">' -%}
+  {%- assign post_content = content | replace: '<pre>', pre_to -%}
   <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+    {{ post_content }}
   </div>
 
   {%- if series %}
