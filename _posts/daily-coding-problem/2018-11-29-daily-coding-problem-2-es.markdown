@@ -17,7 +17,7 @@ Un nuevo día y un nuevo problema por resolver:
 >
 > Extra: ¿y si no puedes usar división?
 
-#### Solución
+## Solución
 
 {% highlight c# %}
 public class ProductsOfAllButItself
@@ -56,7 +56,7 @@ public class ProductsOfAllButItself
 }
 {% endhighlight %}
 
-### Explicación
+## Explicación
 Mi primera idea fue simple: obtener el producto total del arreglo (así haríamos una pasada O(n)) y luego hacer una última pasada para iterar sobre él otra vez, dividiendo el valor actual entre la suma, y ¡bingo! tenemos una solución O(2N)
 
 Entonces:

@@ -28,7 +28,7 @@ Taking a bit longer but here it is a new problem to solve!
 
 This one is written in Python as the problem is stated.
 
-### Solution
+## Solution
 
 {% highlight python %}
 
@@ -103,7 +103,7 @@ public class Node
     }
 {% endhighlight %}
 
-### Explanation
+## Explanation
 
 Both cases use the same logic. The serialization part is done by recursively calling the same function and this is what it does:
 

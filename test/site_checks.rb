@@ -217,11 +217,36 @@ def check_sitemap
   check(broken.empty?, "every sitemap URL has #{LANGS.size} resolving alternates" + (broken.empty? ? "" : ": #{broken.first(5)}"))
 end
 
+# No heading level jumps inside .post-content (H1, the post title, lives outside it): a post
+# must not go straight from the implied h1 to h3+, or from an hN to hN+2 or deeper.
+def check_heading_order
+  files = Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
+                                            .select { |rel| File.read(File.join(SITE, rel)).include?('class="post-content e-content"') }
+  return bad("no post pages found to check heading order") if files.empty?
+
+  broken = []
+  files.each do |rel|
+    html = File.read(File.join(SITE, rel))
+    marker = /<nav class="series-nav"|<a class="btn btn-ghost back-link|<\/article>/
+    content = html[/<div class="post-content e-content"[^>]*>(.*?)(?=#{marker})/m, 1]
+    next broken << "#{rel}: could not find the end of .post-content" if content.nil?
+
+    prev = 1 # the page's own <h1> post title, rendered outside .post-content
+    content.scan(/<h([1-6])[ >]/).flatten.map(&:to_i).each do |lvl|
+      broken << "#{rel}: heading jumps from h#{prev} to h#{lvl}" if lvl > prev + 1
+      prev = lvl
+    end
+  end
+  check(broken.empty?, "no heading level skips inside .post-content" +
+                       (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
+end
+
 case ARGV[0]
-when "home"       then check_home
-when "post-urls"  then check_post_urls
-when "lang-links" then check_lang_links
-when "sitemap"    then check_sitemap
-else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap> [SITE_DIR]"
+when "home"           then check_home
+when "post-urls"      then check_post_urls
+when "lang-links"     then check_lang_links
+when "sitemap"        then check_sitemap
+when "heading-order"  then check_heading_order
+else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap|heading-order> [SITE_DIR]"
 end
 exit($failed ? 1 : 0)

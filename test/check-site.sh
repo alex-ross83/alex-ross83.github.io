@@ -250,6 +250,9 @@ ruby "$(dirname "$0")/site_checks.rb" post-urls "$SITE" || fail=1
 echo "== Language links (every page)"
 ruby "$(dirname "$0")/site_checks.rb" lang-links "$SITE" || fail=1
 
+echo "== Post heading order (audit A1)"
+ruby "$(dirname "$0")/site_checks.rb" heading-order "$SITE" || fail=1
+
 echo "== Sitemap and robots"
 exists sitemap.xml
 exists robots.txt

@@ -18,7 +18,7 @@ Today's problem is:
 >
 > Bonus: Can you do this in one pass?
 
-#### Solution
+## Solution
 
 I wrote my solution in C#:
 
@@ -45,7 +45,7 @@ public class TwoSum{
 }
 {% endhighlight %}
 
-### Explanation
+## Explanation
 
 The basic implementation of this program would be to iterate over every entry in the list and calculate if any two pairs sums to the k amount, however comparing every object of a list of size N against all elements in the same list would result in a O((N-1) * (N - 1)) if we ignored the current element we are visiting, which is almost equivalent to O(N^2) comparison in a worst case scenario, as the problem never stated that the list was ordered (Insight: it would help clarify this and come up with a solution that would take advantage of this). Think of a list of only 3 elements [4, 3, 10] and k = 13. We would calculate the sum of 3 + 10  until the one-to-last iteration. It would go something like this:
 

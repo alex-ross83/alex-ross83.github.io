@@ -19,7 +19,7 @@ El problema de hoy es:
 >
 > Extra: ¿Puedes hacerlo en una sola pasada?
 
-#### Solución
+## Solución
 
 Escribí mi solución en C#:
 
@@ -46,7 +46,7 @@ public class TwoSum{
 }
 {% endhighlight %}
 
-### Explicación
+## Explicación
 
 La implementación básica de este programa sería iterar sobre cada elemento de la lista y calcular si dos de ellos suman la cantidad k, sin embargo comparar cada objeto de una lista de tamaño N contra todos los elementos de la misma lista nos daría un O((N-1) * (N - 1)) si ignoramos el elemento actual que estamos visitando, lo cual es casi equivalente a una comparación O(N^2) en el peor de los casos, ya que el problema nunca dijo que la lista estuviera ordenada (Insight: aclarar esto ayudaría a llegar a una solución que aproveche esa información). Piensa en una lista de solo 3 elementos [4, 3, 10] y k = 13. Calcularíamos la suma de 3 + 10 hasta la penúltima iteración. Se vería más o menos así:
 

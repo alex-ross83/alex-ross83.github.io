@@ -29,7 +29,7 @@ Me tardé un poco más, pero ¡aquí está un nuevo problema para resolver!
 
 Este está escrito en Python, tal como se planteó el problema.
 
-### Solución
+## Solución
 
 {% highlight python %}
 
@@ -104,7 +104,7 @@ public class Node
     }
 {% endhighlight %}
 
-### Explicación
+## Explicación
 
 Ambos casos usan la misma lógica. La parte de serialización se hace llamando recursivamente a la misma función, y esto es lo que hace:
 

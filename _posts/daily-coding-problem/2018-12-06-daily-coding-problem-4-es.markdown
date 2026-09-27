@@ -17,7 +17,7 @@ page_id: daily-coding-problem-4
 > Por ejemplo, la entrada [3, 4, -1, 1] debería dar 2. La entrada [1, 2, 0] debería dar 3.
 > Puedes modificar el arreglo de entrada in-place.
 
-#### Solución
+## Solución
 
 Javascript:
 
@@ -40,7 +40,7 @@ function FindNextPositiveMissingNumber(input){
 
 {% endhighlight %}
 
-### Explicación
+## Explicación
 
 El hecho de que digan que el arreglo se puede modificar significa que podemos hacer lo que queramos con él, así que mi solución consistió en:
 

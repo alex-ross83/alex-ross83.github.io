@@ -16,7 +16,7 @@ One new day and one new problem to solve:
 >
 > Follow-up: what if you can't use division?
 
-#### Solution
+## Solution
 
 {% highlight c# %}
 public class ProductsOfAllButItself
@@ -55,7 +55,7 @@ public class ProductsOfAllButItself
 }
 {% endhighlight %}
 
-### Explanation
+## Explanation
 So my first idea was simple, get the overall product of the array (so we would do an O(n) pass) and then do one last pass to iterate over it again, dividing the actual value over the sum and bingo! we have an O(2N) solution
 
 So:

@@ -16,7 +16,7 @@ A new problem for today's post! We are playing with the rules here and I'm also 
 > For example, the input [3, 4, -1, 1] should give 2. The input [1, 2, 0] should give 3.
 > You can modify the input array in-place.
 
-#### Solution
+## Solution
 
 Javascript:
 
@@ -39,7 +39,7 @@ function FindNextPositiveMissingNumber(input){
 
 {% endhighlight %}
 
-### Explanation
+## Explanation
 
 The fact that they say that the array can be modified means we can do as we please with it so my solution involved:
 
