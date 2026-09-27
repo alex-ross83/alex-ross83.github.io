@@ -332,6 +332,15 @@ lacks es/404.html "<meta name=\"description\" content=\"$ES_DESC\""
 contains es/series/index.html '<html lang="es-MX">'
 contains es/series/index.html '<a class="page-link" lang="en-US" hreflang="en-US" href="/series/">EN</a>'
 
+echo "== Default social share image (audit S5)"
+exists social-card.png
+absent es/social-card.png
+for f in index.html es/index.html about/index.html es/about/index.html series/index.html es/series/index.html 404.html es/404.html "$P1" "es/$P1"; do
+  contains "$f" 'property="og:image" content="https://blog.ross-lopez.rocks/social-card.png"'
+  contains "$f" 'name="twitter:image" content="https://blog.ross-lopez.rocks/social-card.png"'
+  contains "$f" 'name="twitter:card" content="summary_large_image"'
+done
+
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
   contains "$f" '<meta name="google-site-verification" content="hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A" />'

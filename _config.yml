@@ -33,7 +33,15 @@ exclude_from_localization:
   - "favicon.svg"   # icons live once, at the root
   - "favicon.ico"
   - "apple-touch-icon.png"
+  - "social-card.png"   # default share image lives once, at the root
 parallel_localization: true
+
+# Default social share image (1200x630); a post or page can override with its own `image:`.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /social-card.png
 
 sass:
   sourcemap: never   # documented polyglot/Jekyll-4 caveat
