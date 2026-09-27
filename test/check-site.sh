@@ -27,6 +27,13 @@ card_match() {
   KEY="$2" NEEDLE="$3" perl -0ne 'exit(!(/data-section="\Q$ENV{KEY}\E"(.*?)<\/article>/s && index($1, $ENV{NEEDLE}) >= 0))' "$SITE/$1" 2>/dev/null
 }
 card_has()   { card_match "$1" "$2" "$3" && pass "$1 card $2 has: $3" || bad "$1 card $2 lacks: $3"; }
+# lacks_re FILE ERE -> FILE exists and no line matches the extended regex
+lacks_re() { [ -f "$SITE/$1" ] && ! grep -qE -- "$2" "$SITE/$1" && pass "$1 free of /$2/" || bad "$1 matches /$2/: $(grep -oE -- "$2" "$SITE/$1" 2>/dev/null | head -3 | tr '\n' ' ')"; }
+# menu_has FILE NEEDLE -> the <div id="site-menu"> in FILE contains NEEDLE
+menu_has() {
+  NEEDLE="$2" perl -0ne 'exit(!(/<div class="site-menu" id="site-menu">(.*?)<\/div>/s && index($1, $ENV{NEEDLE}) >= 0))' "$SITE/$1" 2>/dev/null \
+    && pass "$1 menu has: $2" || bad "$1 menu lacks: $2"
+}
 card_lacks() { card_match "$1" "$2" "$3" && bad "$1 card $2 should not have: $3" || pass "$1 card $2 free of: $3"; }
 
 P1=coding/problem/2018/11/28/daily-coding-problem-1.html
@@ -232,5 +239,25 @@ contains assets/main.css '#8E8CF5'
 lacks assets/main.css 'Literata'
 # Rouge wraps {% highlight %} in <figure>; its UA 40px margin must be reset so code aligns with text
 contains assets/main.css '.post-content figure'
+
+echo "== Mobile menu"
+for f in index.html es/index.html "$P1" "es/$P1" about/index.html es/about/index.html series/index.html 404.html; do
+  contains "$f" 'class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"'
+  menu_has "$f" 'class="site-nav"'
+  menu_has "$f" 'class="site-nav lang-switch"'
+  contains "$f" "document.documentElement.classList.add('js')"
+done
+contains index.html    'aria-label="Menu"'
+contains es/index.html 'aria-label="Menú"'
+contains assets/main.css '.menu-toggle'
+# .masthead-row shares its element with .wrap; a "padding: X 0" shorthand would wipe the side gutter
+perl -0ne 'exit(/\.masthead-row\s*\{[^}]*\bpadding:\s*\S+\s+0\s*;/ ? 1 : 0)' "$SITE/assets/main.css" \
+  && pass "masthead-row keeps the .wrap side gutter" || bad "masthead-row padding shorthand zeroes the side gutter"
+
+echo "== Tap targets and text scaling"
+contains assets/main.css 'min-height: 44px'
+# font sizes must be relative (rem) so the reader's default text size is honored
+lacks_re assets/main.css 'font-size: [0-9.]+px'
+lacks_re assets/main.css '--(hero|h1|title|text|read|kicker-size): *[0-9.]+px'
 
 exit $fail
