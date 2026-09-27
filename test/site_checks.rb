@@ -61,6 +61,20 @@ def visible_posts(lang)
         .sort_by { |p| -post_time(p).to_f }
 end
 
+ES_MONTHS = load_yaml(File.join(ROOT, "_data/es/months.yml"))
+
+# Mirrors _includes/i18n_date.html (site timezone is Etc/UTC).
+def display_date(post, lang)
+  t = post_time(post).getutc
+  lang == "es" ? "#{t.day} #{ES_MONTHS[t.month.to_s]} #{t.year}" : t.strftime("%b %-d, %Y")
+end
+
+# A home-page link must resolve to a built page and, on a non-default home, stay in that language.
+def link_ok?(href, lang)
+  return false unless href && file_for(href)
+  lang == DEFAULT_LANG || href.start_with?("/#{lang}/")
+end
+
 def home_file(lang) = lang == DEFAULT_LANG ? "index.html" : "#{lang}/index.html"
 
 def check_home
@@ -70,15 +84,22 @@ def check_home
     s = STRINGS[lang]
     vis = visible_posts(lang)
 
-    feed = html.scan(%r{<span class="feed-kicker">(.*?)</span>\s*<h2 class="feed-title"><a href="([^"]+)">(.*?)</a>}m)
+    feed = html.scan(%r{<li class="feed-post">(.*?)</li>}m).flatten.map do |li|
+      [li[%r{<span class="feed-kicker">(.*?)</span>}m, 1].to_s,
+       li[/<h2 class="feed-title"><a href="([^"]+)"/, 1],
+       li[%r{<h2 class="feed-title"><a href="[^"]+">(.*?)</a>}m, 1].to_s,
+       li[%r{<span class="feed-meta">(.*?)</span>}m, 1].to_s.strip]
+    end
     want = [vis.size, 5].min
     check(feed.size == want, "#{file}: Latest shows #{want} posts (got #{feed.size})")
     cta = html[/class="btn btn-cta" href="([^"]+)"/, 1]
     check(!cta.nil? && feed.first && cta == feed.first[1], "#{file}: hero CTA links to the newest post (#{cta.inspect})")
 
-    feed.zip(vis).each do |(kicker, _href, title), post|
+    feed.zip(vis).each do |(kicker, href, title, meta), post|
       next unless post
       check(unescape(title) == post[:data]["title"].to_s, "#{file}: Latest item '#{unescape(title)}' is in date order")
+      check(meta == display_date(post, lang), "#{file}: date of '#{post[:data]["title"]}' shows as '#{display_date(post, lang)}'")
+      check(link_ok?(href, lang), "#{file}: link of '#{post[:data]["title"]}' (#{href}) resolves#{lang == DEFAULT_LANG ? "" : " inside /#{lang}/"}")
       sec = SECTIONS[post[:data]["section"]]
       next unless sec
       expected = sec["title"][lang] || sec["title"]["en"]
@@ -98,9 +119,11 @@ def check_home
         n = in_sec.size
         count = n == 1 ? s["post_count_one"] : s["post_count"].sub("%n", n.to_s)
         check(card.include?(">#{count}<") && !card.include?(s["coming_soon"]), "#{file}: card #{key} shows '#{count}'")
-        titles = card.scan(%r{<li><a href="[^"]+">(.*?)</a></li>}m).flatten.map { |t| unescape(t) }
+        links = card.scan(%r{<li><a href="([^"]+)">(.*?)</a></li>}m)
+        titles = links.map { |_h, t| unescape(t) }
         expected = in_sec.first(3).map { |p| p[:data]["title"].to_s }
         check(titles == expected, "#{file}: card #{key} lists its #{expected.size} newest posts")
+        check(links.all? { |h, _t| link_ok?(h, lang) }, "#{file}: card #{key} links resolve#{lang == DEFAULT_LANG ? "" : " inside /#{lang}/"}")
       end
     end
   end
@@ -120,8 +143,11 @@ def check_post_urls
       bad("#{p[:file]}: section '#{d["section"]}' has no #{lang} path in _data/sections.yml")
       next
     end
-    re = %r{\A/#{ROOT_WORD[lang]}/#{Regexp.escape(path)}/[a-z0-9]+(?:-[a-z0-9]+)*/\z}
-    check(re.match?(d["permalink"].to_s), "#{p[:file]}: permalink #{d["permalink"]} matches /#{ROOT_WORD[lang]}/#{path}/<slug>/")
+    # The URL keeps the section word it was published with, so any section's word is valid
+    # (reshelving edits section: only; URLs are permanent).
+    words = SECTIONS.values.filter_map { |s| s.dig("path", lang) }
+    re = %r{\A/#{ROOT_WORD[lang]}/(?:#{words.map { |w| Regexp.escape(w) }.join("|")})/[a-z0-9]+(?:-[a-z0-9]+)*/\z}
+    check(re.match?(d["permalink"].to_s), "#{p[:file]}: permalink #{d["permalink"]} matches /#{ROOT_WORD[lang]}/<section word>/<slug>/")
     check(!d["description"].to_s.strip.empty?, "#{p[:file]}: has a description")
     twin = styled.find { |q| q != p && q[:data]["page_id"] == d["page_id"] && post_lang(q) != lang }
     check(!d["page_id"].to_s.empty? && !twin.nil?, "#{p[:file]}: has a twin in the other language (page_id '#{d["page_id"]}')")

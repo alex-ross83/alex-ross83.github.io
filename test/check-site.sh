@@ -110,10 +110,6 @@ contains index.html '<title>Rosipedia | Bite-sized takes on AI, coding problems,
 lacks index.html 'Programming Interview questions'
 
 echo "== Task 6: dates"
-contains index.html 'feed-meta">Nov 28, 2018</span>'
-contains index.html 'feed-meta">Dec 5, 2018</span>'
-contains es/index.html 'feed-meta">28 nov 2018</span>'
-contains es/index.html 'feed-meta">5 dic 2018</span>'
 contains "es/$P1" '28 nov 2018'
 contains "$P1" 'Nov 28, 2018'
 lacks es/index.html 'Nov 28, 2018'
@@ -144,13 +140,13 @@ contains "es/$P1" 'og:locale" content="es_MX"'
 
 # Finding 3: Spanish readers stay in /es/, no cross-language leakage
 contains "es/$P1" 'back-link" href="/es/"'
-contains es/index.html "href=\"/es/$P1\""
 contains es/index.html 'href="/es/feed.xml">vía RSS'
-contains es/feed.xml "/es/$P1"
-contains es/feed.xml 'Un nuevo día y un nuevo problema'
 lacks feed.xml 'Un nuevo día y un nuevo problema'
+contains "es/$P2" 'un nuevo problema por resolver'
+# every entry in the Spanish feed links inside /es/ (content-independent; jekyll-feed keeps only the newest 10)
+perl -0ne 'my @l = /<entry[^>]*>.*?<link href="([^"]+)"/sg; exit(!(@l && !grep { !m{^https://blog\.ross-lopez\.rocks/es/} } @l))' "$SITE/es/feed.xml" \
+  && pass "es/feed.xml entries all link inside /es/" || bad "es/feed.xml has entries linking outside /es/"
 same_count index.html es/index.html 'class="feed-post"'
-contains es/index.html 'Un nuevo día y un nuevo problema'
 lacks index.html 'Un nuevo día y un nuevo problema'
 contains es/about/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/about/"'
 
@@ -262,7 +258,7 @@ absent es/sitemap.xml
 absent es/robots.txt
 contains robots.txt 'Sitemap: https://blog.ross-lopez.rocks/sitemap.xml'
 contains sitemap.xml 'xmlns:xhtml="http://www.w3.org/1999/xhtml"'
-lacks sitemap.xml '404'
+lacks sitemap.xml '/404.html'
 python3 -c 'import sys, xml.etree.ElementTree as E; E.parse(sys.argv[1])' "$SITE/sitemap.xml" 2>/dev/null \
   && pass "sitemap.xml is well-formed XML" || bad "sitemap.xml is not well-formed XML"
 ruby "$(dirname "$0")/site_checks.rb" sitemap "$SITE" || fail=1

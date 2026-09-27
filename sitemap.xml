@@ -6,7 +6,7 @@ sitemap: false
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {%- assign docs = site.pages | concat: site.posts -%}
 {%- for doc in docs -%}
-  {%- if doc.sitemap == false or doc.url contains "404" -%}{%- continue -%}{%- endif -%}
+  {%- if doc.sitemap == false or doc.url == "/404.html" -%}{%- continue -%}{%- endif -%}
   {%- assign ext = doc.url | split: "." | last -%}
   {%- if ext == "xml" or ext == "txt" or ext == "css" or ext == "json" -%}{%- continue -%}{%- endif -%}
   {%- for lang in site.languages -%}
