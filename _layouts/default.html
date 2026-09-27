@@ -5,9 +5,12 @@
 
   <body>
 
+    {%- assign s = site.data[site.active_lang].strings | default: site.data.en.strings -%}
+    <a class="skip-link" href="#main">{{ s.skip_link | escape }}</a>
+
     {%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
+    <main class="page-content" id="main" aria-label="Content">
       <div class="wrapper">
         {{ content }}
       </div>

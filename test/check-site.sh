@@ -35,6 +35,11 @@ menu_has() {
     && pass "$1 menu has: $2" || bad "$1 menu lacks: $2"
 }
 card_lacks() { card_match "$1" "$2" "$3" && bad "$1 card $2 should not have: $3" || pass "$1 card $2 free of: $3"; }
+# before FILE A B -> A appears earlier in FILE than B (both present)
+before() {
+  A="$2" B="$3" perl -0ne '$c=$_; $ia=index($c,$ENV{A}); $ib=index($c,$ENV{B}); exit(!($ia>=0 && $ib>=0 && $ia<$ib))' "$SITE/$1" \
+    && pass "$1: '$2' comes before '$3'" || bad "$1: '$2' does not come before '$3'"
+}
 
 P1=coding/problem/2018/11/28/daily-coding-problem-1.html
 P2=coding/problem/2018/11/29/daily-coding-problem-2.html
@@ -352,6 +357,16 @@ lacks index.html '<h2 class="feed-title"'
 contains index.html '<h3 class="feed-title">'
 lacks index.html '<h2 class="kicker section-title"'
 contains index.html '<h3 class="kicker section-title">'
+
+echo "== Skip-to-content link (audit A3)"
+for f in index.html about/index.html "$P1" 404.html; do
+  contains "$f" '<a class="skip-link" href="#main">Skip to content</a>'
+  contains "$f" 'id="main"'
+  before "$f" '<a class="skip-link" href="#main">Skip to content</a>' '<header class="masthead"'
+done
+contains es/index.html '<a class="skip-link" href="#main">Saltar al contenido</a>'
+before es/index.html '<a class="skip-link" href="#main">Saltar al contenido</a>' '<header class="masthead"'
+contains assets/main.css '.skip-link'
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
