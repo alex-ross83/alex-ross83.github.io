@@ -257,19 +257,17 @@ a.kicker:hover{ text-decoration:underline; }
   .wordmark{ flex:1 1 0; min-width:0; overflow-wrap:anywhere; }
   .masthead-actions{ order:2; }
 
-  /* Mobile menu: a full-width panel under the header row. Without JS it simply stays open. */
+  /* Mobile menu: one full-width row under the header (pages left, languages right).
+     It wraps only if large text leaves no room. Without JS it simply stays open. */
   .site-menu{
     order:3; flex-basis:100%; margin-left:0;
-    flex-direction:column; align-items:stretch; gap:0;
-    border-top:1px solid var(--rule);
+    flex-wrap:wrap; justify-content:space-between; gap:0 16px;
+    border-top:1px solid var(--rule); padding-top:4px;
   }
-  .site-menu .site-nav{ flex-direction:column; gap:0; }
-  .site-menu .site-nav .page-link{
-    justify-content:flex-start; min-height:48px; font-size:1rem;
-    border-bottom:1px solid var(--rule);
-  }
-  .site-menu .lang-switch{ flex-direction:row; gap:8px; }
-  .site-menu .lang-switch .page-link{ justify-content:center; border-bottom:0; }
+  .site-menu .site-nav{ gap:4px; }
+  .site-menu .site-nav:first-child{ margin-left:-10px; }
+  .site-menu .site-nav .page-link{ padding:0 10px; font-size:1rem; }
+  .site-menu .lang-switch{ margin-left:auto; margin-right:-10px; }
   .js .menu-toggle{ display:inline-flex; }
   .js .site-menu{ display:none; }
   .js .masthead.menu-open .site-menu{ display:flex; }

@@ -251,6 +251,9 @@ done
 contains index.html    'aria-label="Menu"'
 contains es/index.html 'aria-label="Menú"'
 contains assets/main.css '.menu-toggle'
+# the open phone menu is one row (Series, About | EN ES), not a vertical stack
+perl -0ne 'exit(/\.site-menu[^{]*\{[^}]*flex-direction:\s*column/ ? 1 : 0)' "$SITE/assets/main.css" \
+  && pass "phone menu is a single row" || bad "phone menu stacks its items in a column"
 # .masthead-row shares its element with .wrap; a "padding: X 0" shorthand would wipe the side gutter
 perl -0ne 'exit(/\.masthead-row\s*\{[^}]*\bpadding:\s*\S+\s+0\s*;/ ? 1 : 0)' "$SITE/assets/main.css" \
   && pass "masthead-row keeps the .wrap side gutter" || bad "masthead-row padding shorthand zeroes the side gutter"
