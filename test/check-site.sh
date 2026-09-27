@@ -76,7 +76,7 @@ for P in "$P1" "$P2" "$P3" "$P4"; do
   same_count "$P" "es/$P" 'href="http'
   lacks "es/$P" '&lt;/content&gt;'
 done
-contains "$P1" 'itemprop="name headline">Daily Coding Problem # 1</h1>'
+contains "$P1" 'itemprop="name headline">Daily Coding Problem #1</h1>'
 contains "es/$P1" 'Esta es mi versión de los ejercicios'
 absent coding/problem/2018/11/28/daily-coding-problem-1-es.html
 absent es/coding/problem/2018/11/28/daily-coding-problem-1-es.html
@@ -373,6 +373,17 @@ for P in "$P1" "$P2" "$P3" "$P4"; do
   contains "$P" '<pre tabindex="0" role="region" aria-label="Code">'
   contains "es/$P" '<pre tabindex="0" role="region" aria-label="Código">'
 done
+
+echo "== Normalized post titles, URLs unchanged (audit D3)"
+contains "$P1" 'itemprop="name headline">Daily Coding Problem #1</h1>'
+contains "$P2" 'itemprop="name headline">Daily Coding Problem #2</h1>'
+contains "$P3" 'itemprop="name headline">Daily Coding Problem #3</h1>'
+contains "$P4" 'itemprop="name headline">Daily Coding Problem #4</h1>'
+lacks_re "$P1" 'Daily Coding Problem # '
+lacks_re "$P2" 'Daily Coding Problem # '
+lacks_re "$P4" 'Daily Coding Problem # '
+# URLs/permalinks are untouched: the same P1-P4 paths still resolve (Task 1 already asserts this)
+exists "$P1"; exists "$P2"; exists "$P3"; exists "$P4"
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
