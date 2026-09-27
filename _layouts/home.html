@@ -21,7 +21,7 @@ layout: default
   {%- if site.posts.size > 0 %}
   <section class="home-latest">
     <div class="sec-head">
-      <span class="kicker">{{ page.list_title | default: s.latest }}</span>
+      <h2 class="kicker">{{ page.list_title | default: s.latest }}</h2>
     </div>
     <ul class="feed">
       {%- for post in site.posts limit: 5 -%}
@@ -40,7 +40,7 @@ layout: default
             {{ s.post_kicker_fallback }}
           {%- endif -%}
         </span>
-        <h2 class="feed-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+        <h3 class="feed-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
         {%- if site.show_excerpts %}
         <p class="feed-dek">{{ post.excerpt | strip_html | truncatewords: 24 }}</p>
         {%- endif %}
@@ -53,7 +53,7 @@ layout: default
 
   <section class="home-sections" id="sections">
     <div class="sec-head">
-      <span class="kicker">{{ s.sections }}</span>
+      <h2 class="kicker">{{ s.sections }}</h2>
     </div>
     <div class="section-grid">
       {%- for entry in site.data.sections -%}
@@ -62,7 +62,7 @@ layout: default
       {%- assign sec_posts = site.posts | where: "section", key -%}
       {%- assign n = sec_posts.size | append: "" %}
       <article class="section-card" data-section="{{ key }}">
-        <h2 class="kicker section-title">{{ sec.title[lang] | default: sec.title.en | escape }}</h2>
+        <h3 class="kicker section-title">{{ sec.title[lang] | default: sec.title.en | escape }}</h3>
         <p class="section-desc">{{ sec.description[lang] | default: sec.description.en | escape }}</p>
         {%- if sec_posts.size > 0 %}
         <span class="section-count">{% if sec_posts.size == 1 %}{{ s.post_count_one }}{% else %}{{ s.post_count | replace: "%n", n }}{% endif %}</span>

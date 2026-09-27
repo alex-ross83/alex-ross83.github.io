@@ -95,7 +95,7 @@ contains es/index.html '<span class="eyebrow">IA, código y guías rápidas</spa
 contains index.html '<span class="site-title">Rosipedia</span>'
 contains es/index.html '<span class="site-title">Rosipedia</span>'
 lacks index.html 'Study Blog'
-contains es/index.html '<span class="kicker">Últimas entradas</span>'
+contains es/index.html '<h2 class="kicker">Últimas entradas</h2>'
 contains es/index.html 'Suscribirse <a'
 contains es/index.html '>vía RSS</a>'
 contains "es/$P1" '← Todas las entradas'
@@ -200,8 +200,8 @@ for f in index.html es/index.html; do
     && pass "$f section order" || bad "$f section order: $order"
   contains "$f" 'id="sections"'
 done
-contains index.html    '<span class="kicker">Sections</span>'
-contains es/index.html '<span class="kicker">Secciones</span>'
+contains index.html    '<h2 class="kicker">Sections</h2>'
+contains es/index.html '<h2 class="kicker">Secciones</h2>'
 contains index.html    'Tips &amp; news'
 contains es/index.html 'Tips y noticias'
 card_has   es/index.html coding 'Soluciones a problemas de tipo entrevista técnica con explicaciones.'
@@ -340,6 +340,15 @@ for f in index.html es/index.html about/index.html es/about/index.html series/in
   contains "$f" 'name="twitter:image" content="https://blog.ross-lopez.rocks/social-card.png"'
   contains "$f" 'name="twitter:card" content="summary_large_image"'
 done
+
+echo "== Real headings for Latest/Sections (audit A2)"
+for f in index.html es/index.html; do
+  count_is "$f" '<h2 class="kicker">' 2
+done
+lacks index.html '<h2 class="feed-title"'
+contains index.html '<h3 class="feed-title">'
+lacks index.html '<h2 class="kicker section-title"'
+contains index.html '<h3 class="kicker section-title">'
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do

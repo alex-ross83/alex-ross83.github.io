@@ -86,8 +86,8 @@ def check_home
 
     feed = html.scan(%r{<li class="feed-post">(.*?)</li>}m).flatten.map do |li|
       [li[%r{<span class="feed-kicker">(.*?)</span>}m, 1].to_s,
-       li[/<h2 class="feed-title"><a href="([^"]+)"/, 1],
-       li[%r{<h2 class="feed-title"><a href="[^"]+">(.*?)</a>}m, 1].to_s,
+       li[/<h3 class="feed-title"><a href="([^"]+)"/, 1],
+       li[%r{<h3 class="feed-title"><a href="[^"]+">(.*?)</a>}m, 1].to_s,
        li[%r{<span class="feed-meta">(.*?)</span>}m, 1].to_s.strip]
     end
     want = [vis.size, 5].min
