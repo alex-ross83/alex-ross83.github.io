@@ -1,0 +1,4 @@
+# Full, invariant names of each language (its own autonym), used for the language
+# switcher's aria-label. Visible text stays the short EN/ES code.
+en: English
+es: Español

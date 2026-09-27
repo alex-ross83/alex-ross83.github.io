@@ -163,7 +163,7 @@ def file_for(url)
     .map { |c| File.join(SITE, c) }.find { |f| File.file?(f) }
 end
 
-def switcher_href(html) = html[/class="page-link" lang="[^"]*" hreflang="[^"]*" href="([^"]+)"/, 1]
+def switcher_href(html) = html[/class="page-link" lang="[^"]*" hreflang="[^"]*" aria-label="[^"]*" href="([^"]+)"/, 1]
 
 # On every page with a language switcher: the switcher link and every hreflang link resolve
 # to a built page, the switcher round-trips, and the hreflang list includes the page itself.
