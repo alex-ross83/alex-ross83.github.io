@@ -394,6 +394,11 @@ for f in index.html es/index.html; do
 done
 contains assets/main.css '.x-icon'
 
+echo "== Table overflow (new)"
+ruby "$(dirname "$0")/site_checks.rb" table-scroll "$SITE" || fail=1
+contains assets/main.css '.post-content .table-scroll {'
+contains assets/main.css '.post-content table {'
+
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do
   contains "$f" '<meta name="google-site-verification" content="hpYViAb1tvW9NeImktdpED81Rxt0Fi-N8yjJkfq7Z_A" />'

@@ -217,18 +217,27 @@ def check_sitemap
   check(broken.empty?, "every sitemap URL has #{LANGS.size} resolving alternates" + (broken.empty? ? "" : ": #{broken.first(5)}"))
 end
 
+# Every built page with .post-content, alongside the raw HTML.
+def post_pages
+  Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
+                                    .select { |rel| File.read(File.join(SITE, rel)).include?('class="post-content e-content"') }
+end
+
+# Slices out the article body (H1, the post title, lives outside it, hence its own marker set).
+def post_content_html(html)
+  marker = /<nav class="series-nav"|<a class="btn btn-ghost back-link|<\/article>/
+  html[/<div class="post-content e-content"[^>]*>(.*?)(?=#{marker})/m, 1]
+end
+
 # No heading level jumps inside .post-content (H1, the post title, lives outside it): a post
 # must not go straight from the implied h1 to h3+, or from an hN to hN+2 or deeper.
 def check_heading_order
-  files = Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
-                                            .select { |rel| File.read(File.join(SITE, rel)).include?('class="post-content e-content"') }
+  files = post_pages
   return bad("no post pages found to check heading order") if files.empty?
 
   broken = []
   files.each do |rel|
-    html = File.read(File.join(SITE, rel))
-    marker = /<nav class="series-nav"|<a class="btn btn-ghost back-link|<\/article>/
-    content = html[/<div class="post-content e-content"[^>]*>(.*?)(?=#{marker})/m, 1]
+    content = post_content_html(File.read(File.join(SITE, rel)))
     next broken << "#{rel}: could not find the end of .post-content" if content.nil?
 
     prev = 1 # the page's own <h1> post title, rendered outside .post-content
@@ -241,12 +250,36 @@ def check_heading_order
                        (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
 end
 
+# A <table> inside post content must be wrapped in a keyboard-scrollable, localized-labeled
+# region (the same treatment post.html gives overflowing <pre> blocks), so a wide table scrolls
+# in its own box instead of the whole page scrolling sideways.
+def check_table_scroll
+  found = 0
+  broken = []
+  post_pages.each do |rel|
+    html = File.read(File.join(SITE, rel))
+    content = post_content_html(html)
+    next if content.nil?
+    tables = content.scan("<table>").size
+    next if tables.zero?
+    found += tables
+    lang = html[/<html lang="(\w\w)-/, 1] || DEFAULT_LANG
+    label = STRINGS[lang]["table_region"]
+    wrapped = content.scan(/<div class="table-scroll" tabindex="0" role="region" aria-label="#{Regexp.escape(label)}">\s*<table>.*?<\/table>\s*<\/div>/m).size
+    broken << "#{rel}: #{tables} <table> but only #{wrapped} wrapped with aria-label #{label.inspect}" unless wrapped == tables
+  end
+  check(found.positive?, "found #{found} <table> elements to check")
+  check(broken.empty?, "every table is wrapped in a keyboard-scrollable, labeled region" +
+                       (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
+end
+
 case ARGV[0]
 when "home"           then check_home
 when "post-urls"      then check_post_urls
 when "lang-links"     then check_lang_links
 when "sitemap"        then check_sitemap
 when "heading-order"  then check_heading_order
-else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap|heading-order> [SITE_DIR]"
+when "table-scroll"   then check_table_scroll
+else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap|heading-order|table-scroll> [SITE_DIR]"
 end
 exit($failed ? 1 : 0)
