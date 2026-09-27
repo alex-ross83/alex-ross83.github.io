@@ -250,6 +250,44 @@ def check_heading_order
                        (broken.empty? ? "" : ":\n        " + broken.first(10).join("\n        ")))
 end
 
+# Every <img> anywhere in the built site must point at a file that actually exists, and every
+# <img> inside post content must carry non-empty alt text (external/data URLs are skipped for
+# the existence check; the site has neither today, but this is defensive).
+def check_images
+  files = Dir[File.join(SITE, "**/*.html")].map { |f| f.delete_prefix("#{SITE}/") }
+  missing = []
+  seen = 0
+  files.each do |rel|
+    html = File.read(File.join(SITE, rel))
+    html.scan(/<img\b([^>]*)>/).flatten.each do |attrs|
+      seen += 1
+      src = attrs[/\bsrc="([^"]*)"/, 1].to_s
+      next missing << "#{rel}: <img> has no src" if src.empty?
+      next if src.start_with?("http://", "https://", "data:")
+      path = src.split(/[?#]/).first
+      missing << "#{rel}: img src #{src} has no file on disk" unless File.file?(File.join(SITE, path))
+    end
+  end
+  check(seen.positive?, "found #{seen} <img> tags to check")
+  check(missing.empty?, "every <img> src resolves to a file on disk" +
+                        (missing.empty? ? "" : ":\n        " + missing.first(10).join("\n        ")))
+
+  no_alt = []
+  alt_seen = 0
+  post_pages.each do |rel|
+    content = post_content_html(File.read(File.join(SITE, rel)))
+    next if content.nil?
+    content.scan(/<img\b([^>]*)>/).flatten.each do |attrs|
+      alt_seen += 1
+      alt = attrs[/\balt="([^"]*)"/, 1]
+      no_alt << "#{rel}: <img #{attrs.strip}> has empty/missing alt" if alt.to_s.strip.empty?
+    end
+  end
+  check(alt_seen.positive?, "found #{alt_seen} post-content <img> tags to check for alt text")
+  check(no_alt.empty?, "every post-content <img> has non-empty alt text" +
+                       (no_alt.empty? ? "" : ":\n        " + no_alt.first(10).join("\n        ")))
+end
+
 # A <table> inside post content must be wrapped in a keyboard-scrollable, localized-labeled
 # region (the same treatment post.html gives overflowing <pre> blocks), so a wide table scrolls
 # in its own box instead of the whole page scrolling sideways.
@@ -279,7 +317,8 @@ when "post-urls"      then check_post_urls
 when "lang-links"     then check_lang_links
 when "sitemap"        then check_sitemap
 when "heading-order"  then check_heading_order
+when "images"         then check_images
 when "table-scroll"   then check_table_scroll
-else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap|heading-order|table-scroll> [SITE_DIR]"
+else abort "usage: ruby test/site_checks.rb <home|post-urls|lang-links|sitemap|heading-order|images|table-scroll> [SITE_DIR]"
 end
 exit($failed ? 1 : 0)

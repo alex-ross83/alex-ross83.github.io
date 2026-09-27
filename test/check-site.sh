@@ -394,6 +394,12 @@ for f in index.html es/index.html; do
 done
 contains assets/main.css '.x-icon'
 
+echo "== Post images (new)"
+ruby "$(dirname "$0")/site_checks.rb" images "$SITE" || fail=1
+contains assets/main.css '.post-content img {'
+contains assets/main.css 'max-width: 100%;'
+contains assets/main.css 'height: auto;'
+
 echo "== Table overflow (new)"
 ruby "$(dirname "$0")/site_checks.rb" table-scroll "$SITE" || fail=1
 contains assets/main.css '.post-content .table-scroll {'
