@@ -278,4 +278,18 @@ done
 contains index.html 'rosipediaLangSuggest'
 contains assets/main.css '.lang-suggest[hidden]'
 
+echo "== Spanish search snippets (audit S1)"
+EN_DESC='Bite-sized takes on AI, coding problems, quick starts, tips and tech news.'
+ES_DESC='Contenido breve sobre IA, problemas de programación, guías rápidas, tips y noticias de tecnología.'
+for f in es/index.html es/about/index.html es/series/index.html es/404.html; do
+  lacks "$f" "$EN_DESC"
+  contains "$f" "<meta name=\"description\" content=\"$ES_DESC\""
+  contains "$f" "property=\"og:description\" content=\"$ES_DESC\""
+  contains "$f" "\"description\":\"$ES_DESC\""
+done
+contains es/index.html "<title>Rosipedia | $ES_DESC</title>"
+for f in index.html about/index.html series/index.html 404.html; do
+  contains "$f" "<meta name=\"description\" content=\"$EN_DESC\""
+done
+
 exit $fail

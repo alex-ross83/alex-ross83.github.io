@@ -17,6 +17,9 @@
     {%- assign seo_from = '"' | append: site.url | append: page.url | append: '"' -%}
     {%- assign seo_to = '"' | append: site.url | append: '/' | append: site.active_lang | append: page.url | append: '"' -%}
     {%- assign seo_out = seo_out | replace: seo_from, seo_to -%}
+    {%- comment -%} jekyll-seo-tag only knows the English site.description; swap in this language's. {%- endcomment -%}
+    {%- assign lang_desc = site.data[site.active_lang].strings.description -%}
+    {%- if lang_desc -%}{%- assign seo_out = seo_out | replace: site.description, lang_desc -%}{%- endif -%}
   {%- endif -%}
   {%- assign seo_locale_code = site.data.locales[site.active_lang] | replace: '-', '_' -%}
   {%- assign seo_locale_to = 'og:locale" content="' | append: seo_locale_code | append: '"' -%}
