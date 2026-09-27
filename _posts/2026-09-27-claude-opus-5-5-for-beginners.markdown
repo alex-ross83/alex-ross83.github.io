@@ -96,7 +96,7 @@ Quick glossary. A *benchmark* is a standard test for comparing AI models. *Vendo
 | | **Opus 5.5 (new)** | Opus 5 | Fable 5.1 | Sonnet 5 | Opus 4.8 |
 |---|---|---|---|---|---|
 | Released | Sep 22, 2026 | Jul 24, 2026 | Sep 1, 2026 | Jun 30, 2026 | May 28, 2026 |
-| Developer price, $ per million tokens in / out | **$4 / $20** | $5 / $25 | $10 / $50 | $2 / $10 | $5 / $25 |
+| Developer price, $ per million tokens in / out\*\* | **$4 / $20** | $5 / $25 | $10 / $50 | $2 / $10 | $5 / $25 |
 | Knowledge cutoff | Jun 2026 | May 2026 | Jun 2026 | Jan 2026 | Jan 2026 |
 | Default effort | medium | high | high | high | high |
 | Speed | 30%+ faster output than Opus 5 | baseline | slower | fast | n/p |
@@ -106,6 +106,8 @@ Quick glossary. A *benchmark* is a standard test for comparing AI models. *Vendo
 | Chartography, reading charts | **89.0%** | 83.4% | 88.4% | n/p | n/p |
 | OSWorld 2.0, using a computer | **81.8%** | 74.0% | 80.7% | n/p | n/p |
 | Artificial Analysis index (independent) | **58, #1 measured** | lower | not stated | not stated | not stated |
+
+\*\*These are the prices at launch, I don't promise I will keep them up to date.
 
 Benchmark rows are vendor-reported by Anthropic unless marked independent. n/p means not published in Anthropic's Opus 5.5 announcement. "At launch" is the plan setup when that model came out, which may have changed since.
 
