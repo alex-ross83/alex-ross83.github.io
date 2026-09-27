@@ -217,6 +217,7 @@ count_is index.html    'First post coming soon.' 3
 count_is es/index.html 'Primera entrada muy pronto.' 3
 contains index.html    'Tips &amp; news'
 contains es/index.html 'Tips y noticias'
+card_has   es/index.html coding 'Soluciones a problemas de tipo entrevista técnica con explicaciones.'
 card_has   index.html ai 'First post coming soon.'
 card_has   es/index.html ai 'Primera entrada muy pronto.'
 card_has   index.html coding '4 posts'
