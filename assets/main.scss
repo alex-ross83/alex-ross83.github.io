@@ -142,6 +142,19 @@ a.kicker:hover{ text-decoration:underline; }
   :root:not([data-theme="light"]) .theme-toggle .icon-moon{ display:block; }
 }
 
+/* ---------- Spanish suggestion bar (English pages, Spanish-first browsers) ---------- */
+.lang-suggest{ background:var(--surface-2); border-bottom:1px solid var(--rule); }
+.lang-suggest[hidden]{ display:none; }
+.lang-suggest-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:2px; }
+.lang-suggest-text{ margin:0; font-size:.875rem; color:var(--body); }
+.lang-suggest-cta{ display:inline-block; padding:12px 0; margin:-12px 0 -12px 4px; font-weight:600; }
+.lang-suggest-close{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:44px; height:44px; border:0; border-radius:var(--radius);
+  background:transparent; color:var(--muted); font-size:1.25rem; line-height:1; cursor:pointer;
+}
+.lang-suggest-close:hover{ color:var(--ink); }
+
 /* ---------- home: hero ---------- */
 .hero{ padding:40px 0 120px; max-width:var(--measure); }
 .hero-title{

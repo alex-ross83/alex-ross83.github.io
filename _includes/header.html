@@ -45,6 +45,16 @@
     </div>
   </div>
 </header>
+{%- if site.active_lang == site.default_lang %}
+{%- assign es_s = site.data.es.strings %}
+{%- assign es_path = page.permalink_lang.es | default: page.url %}
+<div class="lang-suggest" lang="es-MX" role="region" aria-label="{{ es_s.lang_label }}" hidden>
+  <div class="wrap lang-suggest-row">
+    <p class="lang-suggest-text">{{ es_s.lang_suggest }} <a class="lang-suggest-cta" hreflang="es-MX" {% static_href %}href="/es{{ es_path }}"{% endstatic_href %}>{{ es_s.lang_suggest_cta }}</a></p>
+    <button class="lang-suggest-close" type="button" aria-label="{{ es_s.lang_suggest_close }}">×</button>
+  </div>
+</div>
+{%- endif %}
 
 <script>
 (function(){
@@ -94,5 +104,32 @@
       btn.focus();
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  var KEY = 'lang_pref';
+  function get(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function set(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  // Using the EN/ES switcher counts as a choice, on every page.
+  var links = document.querySelectorAll('.lang-switch a[hreflang]');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(){ set(this.getAttribute('hreflang').slice(0, 2)); });
+  }
+
+  // Suggestion bar (English pages only): shown when the browser's first-choice language is
+  // Spanish (es, es-MX, es-419, …) and the reader hasn't chosen yet. Never redirects.
+  var bar = document.querySelector('.lang-suggest');
+  if (!bar) return;
+  function prefersSpanish(){
+    var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    return /^es(-|$)/i.test(l);
+  }
+  window.rosipediaLangSuggest = function(){ bar.hidden = !(prefersSpanish() && !get()); };
+  bar.querySelector('.lang-suggest-cta').addEventListener('click', function(){ set('es'); });
+  bar.querySelector('.lang-suggest-close').addEventListener('click', function(){ set('en'); bar.hidden = true; });
+  window.rosipediaLangSuggest();
 })();
 </script>

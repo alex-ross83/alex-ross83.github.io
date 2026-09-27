@@ -267,4 +267,19 @@ python3 -c 'import sys, xml.etree.ElementTree as E; E.parse(sys.argv[1])' "$SITE
   && pass "sitemap.xml is well-formed XML" || bad "sitemap.xml is not well-formed XML"
 ruby "$(dirname "$0")/site_checks.rb" sitemap "$SITE" || fail=1
 
+echo "== Spanish suggestion banner"
+for f in index.html about/index.html series/index.html "$P1"; do
+  contains "$f" '<div class="lang-suggest" lang="es-MX" role="region" aria-label="Idioma" hidden>'
+  contains "$f" '¿Prefieres leer en español?'
+  contains "$f" 'aria-label="Cerrar"'
+done
+contains index.html          'class="lang-suggest-cta" hreflang="es-MX" href="/es/">Ver en español</a>'
+contains about/index.html    'class="lang-suggest-cta" hreflang="es-MX" href="/es/about/">Ver en español</a>'
+contains "$P1"               "class=\"lang-suggest-cta\" hreflang=\"es-MX\" href=\"/es/$P1\">Ver en español</a>"
+for f in es/index.html es/about/index.html "es/$P1"; do
+  lacks "$f" 'class="lang-suggest"'
+done
+contains index.html 'rosipediaLangSuggest'
+contains assets/main.css '.lang-suggest[hidden]'
+
 exit $fail
