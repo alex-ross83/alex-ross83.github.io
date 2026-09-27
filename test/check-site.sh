@@ -188,8 +188,6 @@ echo "== Signal home: hero"
 for f in index.html es/index.html; do
   contains "$f" '<section class="hero">'
 done
-contains index.html    "class=\"btn btn-cta\" href=\"/$P4\""
-contains es/index.html "class=\"btn btn-cta\" href=\"/es/$P4\""
 contains index.html    'class="btn btn-ghost" href="/series/"'
 contains es/index.html 'class="btn btn-ghost" href="/es/series/"'
 contains index.html    '<h1 class="hero-title">Bite-sized takes on AI and code</h1>'
@@ -198,10 +196,6 @@ contains index.html    'Read the latest →'
 contains es/index.html 'Lee lo más reciente →'
 contains index.html    'All series</a>'
 contains es/index.html 'Todas las series</a>'
-
-echo "== Signal home: latest feed"
-contains index.html    'feed-kicker">Coding problems · Daily Coding Problem</span>'
-contains es/index.html 'feed-kicker">Problemas de programación · Daily Coding Problem</span>'
 
 echo "== Signal home: sections"
 for f in index.html es/index.html; do
@@ -213,21 +207,12 @@ for f in index.html es/index.html; do
 done
 contains index.html    '<span class="kicker">Sections</span>'
 contains es/index.html '<span class="kicker">Secciones</span>'
-count_is index.html    'First post coming soon.' 3
-count_is es/index.html 'Primera entrada muy pronto.' 3
 contains index.html    'Tips &amp; news'
 contains es/index.html 'Tips y noticias'
 card_has   es/index.html coding 'Soluciones a problemas de tipo entrevista técnica con explicaciones.'
-card_has   index.html ai 'First post coming soon.'
-card_has   es/index.html ai 'Primera entrada muy pronto.'
-card_has   index.html coding '4 posts'
-card_has   es/index.html coding '4 entradas'
-card_has   index.html coding "href=\"/$P4\""
-card_has   index.html coding "href=\"/$P2\""
-card_lacks index.html coding "href=\"/$P1\""
-card_has   es/index.html coding "href=\"/es/$P4\""
-card_lacks es/index.html coding "href=\"/es/$P1\""
-card_lacks index.html coding 'First post coming soon.'
+
+echo "== Home content (derived from _posts/)"
+ruby "$(dirname "$0")/site_checks.rb" home "$SITE" || fail=1
 
 echo "== Signal styles"
 for f in index.html es/index.html "$P1" "es/$P1" about/index.html es/about/index.html series/index.html 404.html; do
