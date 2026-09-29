@@ -404,6 +404,7 @@ echo "== Table overflow (new)"
 ruby "$(dirname "$0")/site_checks.rb" table-scroll "$SITE" || fail=1
 contains assets/main.css '.post-content .table-scroll {'
 contains assets/main.css '.post-content table {'
+lacks assets/main.css 'white-space: nowrap;'
 
 echo "== Google Search Console verification"
 for f in index.html es/index.html; do

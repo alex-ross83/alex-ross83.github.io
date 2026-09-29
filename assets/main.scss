@@ -250,8 +250,13 @@ a.kicker:hover{ text-decoration:underline; }
 }
 .post-content table{ border-collapse:collapse; font-size:.9375rem; }
 .post-content th, .post-content td{
-  padding:10px 14px; border-bottom:1px solid var(--rule); text-align:left; white-space:nowrap;
+  padding:10px 14px; border-bottom:1px solid var(--rule); text-align:left;
+  white-space:normal; overflow-wrap:anywhere; min-width:6em;
 }
+/* Wide (6+ column) comparison tables keep the row-label column a bit roomier, so it wraps
+   into a few words per line instead of one word per line; short tables never match this. */
+.post-content table:has(th:nth-child(6)) th:first-child,
+.post-content table:has(th:nth-child(6)) td:first-child{ min-width:10em; }
 .post-content thead th{ background:var(--surface-2); font-weight:700; color:var(--ink); }
 .post-content tr:last-child td{ border-bottom:0; }
 .back-link{ margin-top:48px; }
