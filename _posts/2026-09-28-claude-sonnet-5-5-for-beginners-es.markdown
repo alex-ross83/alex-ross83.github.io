@@ -25,7 +25,7 @@ Lo que mejoró, según Anthropic:
 - Escribe sus respuestas 30% más rápido o más.
 - Lo que ya funcionaba con Sonnet 5 debería seguir funcionando.
 
-Ese último punto es el que más te importa. Nada de lo que aprendiste la semana pasada se va a la basura. Todos los hábitos del post de Opus 5.5 aplican aquí, con una excepción que te explico más abajo.
+Ese último punto es el que más te importa. Todos los hábitos del post de Opus 5.5 aplican aquí, con una excepción que te explico más abajo.
 
 ![El menú de modelos de Claude en un plan Pro: Sonnet 5.5 aparece junto a Opus 5.5, el Effort dice Medium y Sonnet 5 sigue disponible en More models](/assets/images/posts/claude-sonnet-5-5-for-beginners/model-picker-pro.png)
 
@@ -59,9 +59,9 @@ La línea que trae la guía es "Think the problem through before you answer." La
 
 La fila de las ideas sale de una advertencia de la misma guía: si le pides algo muy abierto, puede ponerse a "armar una presentación" cuando tú solo querías ideas. Una oración al principio lo evita.
 
-## Prompts para copiar
+## Prompts para probar
 
-Cambia lo que está entre corchetes por tus datos. Usa números inventados y gráficas públicas (una gráfica del INEGI o de cualquier oficina de estadística funciona muy bien), nunca nada del trabajo, y tapa cualquier dato personal antes de compartir una captura.
+Yo utilicé lo que está entre corchetes como ejemplo. Usa números inventados y gráficas públicas (una gráfica del INEGI o de cualquier oficina de estadística funciona muy bien), nunca nada del trabajo, y tapa cualquier dato personal antes de compartir una captura.
 
 ```text
 Aquí va una captura de una gráfica. En dos oraciones, ¿qué dice y qué llama la atención?
