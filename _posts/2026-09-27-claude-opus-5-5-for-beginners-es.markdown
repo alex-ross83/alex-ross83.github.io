@@ -12,6 +12,8 @@ permalink: /entradas/tips-noticias/claude-opus-5-5-desde-cero/
 
 La IA más nueva de Anthropic, Claude Opus 5.5, responde mejor a peticiones sencillas que a trucos rebuscados. Aquí va qué cambió y cómo hablarle, aunque nunca le hayas escrito una sola palabra a una IA.
 
+*Actualizado el 28 de septiembre: ya salió Sonnet 5.5 y las cuentas gratis ya lo tienen. [Aquí te cuento qué cambió](/es/entradas/tips-noticias/claude-sonnet-5-5-desde-cero/).*
+
 ## Qué es Opus 5.5, sin tecnicismos
 
 Anthropic lanzó Claude Opus 5.5 el 22 de septiembre de 2026. Es un *modelo* nuevo, que es simplemente el nombre de la IA que te contesta dentro de la app de Claude.
@@ -27,13 +29,13 @@ Lo que mejoró para el uso diario:
 
 Lo primero es lo que más importa. Anthropic probó quitar frases como "piensa con cuidado" de las peticiones, y las respuestas empezaron antes sin una baja clara en la calidad. Olvídate de las frases mágicas que circulan en redes.
 
-Un detalle honesto: Opus 5.5 solo viene en los planes de pago (Pro en adelante), según la página de precios de Anthropic al 27 de septiembre. Las cuentas gratis usan Sonnet 5, un modelo de Claude más chico. Todos los hábitos de abajo funcionan igual ahí, y te alcanza de sobra para aprender.
+Un detalle honesto: Opus 5.5 solo viene en los planes de pago (Pro en adelante), según la página de precios de Anthropic al 27 de septiembre. Las cuentas gratis usaron Sonnet 5, un modelo de Claude más chico, hasta el 28 de septiembre. Ahora tienen Sonnet 5.5. Todos los hábitos de abajo funcionan igual ahí, y te alcanza de sobra para aprender.
 
 ![El menú de modelos de Claude en un plan Pro: Opus 5.5 está seleccionado y el ajuste de Effort debajo dice Medium](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-pro.png)
 
-Ese menú también trae un ajuste de **Effort** (esfuerzo), que controla cuánto piensa el modelo antes de contestar. Viene en Medium, y ahí conviene dejarlo. En una cuenta gratis la misma idea aparece como una barra entre Budget e Intelligence.
+Ese menú también trae un ajuste de **Effort** (esfuerzo), que controla cuánto piensa el modelo antes de contestar. Viene en Medium, y ahí conviene dejarlo. Cuando escribí esto, una cuenta gratis mostraba la misma idea como una barra entre Budget e Intelligence. Ahora las cuentas gratis traen el mismo menú de Effort.
 
-![El ajuste de modelo del plan gratis: Sonnet 5 en Medium, con una barra que va de Budget a Intelligence](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-free.png)
+![El ajuste de modelo del plan gratis el 27 de septiembre: Sonnet 5 en Medium, con una barra que va de Budget a Intelligence](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-free.png)
 
 ## Cómo hablarle
 
@@ -100,11 +102,11 @@ Mini glosario. Un *benchmark* es una prueba estándar para comparar modelos de I
 | Conocimiento hasta | jun 2026 | may 2026 | jun 2026 | ene 2026 | ene 2026 |
 | Esfuerzo predeterminado | medio | alto | alto | alto | alto |
 | Velocidad | 30%+ más rápido al escribir que Opus 5 | referencia | más lento | rápido | n/p |
-| Planes en la app de Claude | Pro en adelante, no en Gratis | Pro y Max (al lanzarse) | Pro en adelante, con créditos de uso | Gratis en adelante | sin verificar |
+| Planes en la app de Claude | Pro en adelante, no en Gratis | Pro y Max (al lanzarse) | Pro en adelante, con créditos de uso | Gratis hasta el 27 sep, ahora planes de pago | sin verificar |
 | Terminal-Bench 4.0, tareas de programación* | **66.4%** | 52.3% | 55.8% | n/p | n/p |
 | GDPval-AA, trabajo de oficina (puntaje Elo) | **1846** | 1708 | 1735 | n/p | n/p |
-| Chartography, lectura de gráficas | **89.0%** | 83.4% | 88.4% | n/p | n/p |
-| OSWorld 2.0, uso de una computadora | **81.8%** | 74.0% | 80.7% | n/p | n/p |
+| Chartography, lectura de gráficas (con herramientas) | **89.0%** | 83.4% | 88.4% | n/p | n/p |
+| OSWorld 2.1, uso de una computadora | **81.8%** | 74.0% | 80.7% | n/p | n/p |
 | Índice de Artificial Analysis (independiente) | **58, el #1 medido** | menor | sin dato | sin dato | sin dato |
 
 \*\*Estos son los precios anunciados en el lanzamiento, no prometo mantenerlos actualizados.
@@ -115,7 +117,7 @@ Las filas de benchmarks son reportadas por Anthropic, salvo la marcada como inde
 
 Sobre el esfuerzo, una advertencia. En la app es el menú de Effort, y los desarrolladores tienen una perilla que va de bajo a máximo, y Opus 5.5 arranca en medio, donde según Anthropic iguala o supera a Opus 5 en alto en pruebas de programación y trabajo de oficina. Más alto no siempre es mejor. Artificial Analysis encontró que sus tareas de prueba costaban unos $1.34 cada una en medio y $5.98 en máximo, y en máximo Opus 5.5 escribe tanto que termina costando casi lo mismo por tarea que Opus 5. Mi suposición, no un dato medido: en un plan de pago, pensar de más probablemente también se come tus límites de uso más rápido.
 
-Anthropic también dice que Opus 5.5 cuesta alrededor de 40% menos de operar que Opus 5, sumando el precio más bajo y que termina el trabajo con menos texto. Sonnet 5.5 y Haiku 5.5 llegan "en las próximas semanas", según el mismo anuncio.
+Anthropic también dice que Opus 5.5 cuesta alrededor de 40% menos de operar que Opus 5, sumando el precio más bajo y que termina el trabajo con menos texto. Sonnet 5.5 llegó el 28 de septiembre ([aquí lo explico](/es/entradas/tips-noticias/claude-sonnet-5-5-desde-cero/)), y Haiku 5.5 llega "en las próximas semanas", según Anthropic.
 
 Fuentes (en inglés): [anuncio de Anthropic](https://www.anthropic.com/claude-opus-5-5), [Prompting Claude Opus 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5), [precios de Claude](https://claude.com/pricing), [Artificial Analysis](https://artificialanalysis.ai/articles/claude-opus-5-5) y [sus costos por tarea](https://artificialanalysis.ai/models/releases/claude-opus-5-5).
 

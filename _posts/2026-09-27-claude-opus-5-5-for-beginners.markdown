@@ -12,6 +12,8 @@ permalink: /entries/tips-news/claude-opus-5-5-for-beginners/
 
 Anthropic's newest AI, Claude Opus 5.5, rewards plain requests over clever tricks. Here's what changed and how to talk to it, even if you've never typed a single word to an AI.
 
+*Updated September 28: Sonnet 5.5 is out, and free accounts now get it. [Here's what changed](/entries/tips-news/claude-sonnet-5-5-for-beginners/).*
+
 ## What Opus 5.5 is, in plain words
 
 Anthropic released Claude Opus 5.5 on September 22, 2026. It's a new *model*, which is just the name for the AI that answers you inside the Claude app.
@@ -27,13 +29,13 @@ Here's what got better for everyday use:
 
 The first point is the big one. Anthropic tried deleting lines like "think carefully" from requests, and replies started sooner with no clear drop in quality. Skip the magic phrases.
 
-One honest catch: Opus 5.5 is only on paid plans (Pro and up), according to Anthropic's pricing page on September 27. Free accounts get Sonnet 5, a smaller Claude model. Every habit below works there too, and it's plenty to learn on.
+One honest catch: Opus 5.5 is only on paid plans (Pro and up), according to Anthropic's pricing page on September 27. Free accounts got Sonnet 5, a smaller Claude model, until September 28. Now they get Sonnet 5.5. Every habit below works there too, and it's plenty to learn on.
 
 ![Claude's model menu on a Pro plan: Opus 5.5 is selected, and the Effort setting below it reads Medium](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-pro.png)
 
-That menu also has an **Effort** setting, which controls how much the model thinks before it answers. It starts on Medium, and that's where you should leave it. On a free account the same idea shows up as a slider between Budget and Intelligence.
+That menu also has an **Effort** setting, which controls how much the model thinks before it answers. It starts on Medium, and that's where you should leave it. When I wrote this, a free account showed the same idea as a slider between Budget and Intelligence. Free accounts now get the same Effort menu.
 
-![The free plan's model setting: Sonnet 5 on Medium, with a slider running from Budget to Intelligence](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-free.png)
+![The free plan's model setting on September 27: Sonnet 5 on Medium, with a slider running from Budget to Intelligence](/assets/images/posts/claude-opus-5-5-for-beginners/model-picker-free.png)
 
 ## How to talk to it
 
@@ -100,11 +102,11 @@ Quick glossary. A *benchmark* is a standard test for comparing AI models. *Vendo
 | Knowledge cutoff | Jun 2026 | May 2026 | Jun 2026 | Jan 2026 | Jan 2026 |
 | Default effort | medium | high | high | high | high |
 | Speed | 30%+ faster output than Opus 5 | baseline | slower | fast | n/p |
-| Claude app plans | Pro and up, not Free | Pro and Max (at launch) | Pro and up, via usage credits | Free and up | not checked |
+| Claude app plans | Pro and up, not Free | Pro and Max (at launch) | Pro and up, via usage credits | Free until Sep 27, now paid plans | not checked |
 | Terminal-Bench 4.0, coding tasks* | **66.4%** | 52.3% | 55.8% | n/p | n/p |
 | GDPval-AA, office work (Elo score) | **1846** | 1708 | 1735 | n/p | n/p |
-| Chartography, reading charts | **89.0%** | 83.4% | 88.4% | n/p | n/p |
-| OSWorld 2.0, using a computer | **81.8%** | 74.0% | 80.7% | n/p | n/p |
+| Chartography, reading charts (with tools) | **89.0%** | 83.4% | 88.4% | n/p | n/p |
+| OSWorld 2.1, using a computer | **81.8%** | 74.0% | 80.7% | n/p | n/p |
 | Artificial Analysis index (independent) | **58, #1 measured** | lower | not stated | not stated | not stated |
 
 \*\*These are the prices at launch, I don't promise I will keep them up to date.
@@ -115,7 +117,7 @@ Benchmark rows are vendor-reported by Anthropic unless marked independent. n/p m
 
 Effort deserves one warning. In the app it's the Effort menu, and developers get a dial from low to max, and Opus 5.5 starts at medium, where Anthropic says it matches or beats Opus 5 on high in coding and office-work tests. Higher isn't automatically better. Artificial Analysis found its test tasks cost about $1.34 each at medium and $5.98 at max, and at max Opus 5.5 writes so much that it lands near Opus 5's cost per task. My guess, not a measured fact: on a paid plan, heavier thinking also eats your usage limits faster.
 
-Anthropic also says Opus 5.5 costs about 40% less to run than Opus 5, counting the lower price and shorter work together. Sonnet 5.5 and Haiku 5.5 are due "in the coming weeks," per the same announcement.
+Anthropic also says Opus 5.5 costs about 40% less to run than Opus 5, counting the lower price and shorter work together. Sonnet 5.5 followed on September 28 ([my explainer](/entries/tips-news/claude-sonnet-5-5-for-beginners/)), and Haiku 5.5 is due "in the coming weeks," per Anthropic.
 
 Sources: [Anthropic's announcement](https://www.anthropic.com/claude-opus-5-5), [Prompting Claude Opus 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5), [Claude pricing](https://claude.com/pricing), [Artificial Analysis](https://artificialanalysis.ai/articles/claude-opus-5-5) and [its cost-per-task figures](https://artificialanalysis.ai/models/releases/claude-opus-5-5).
 
