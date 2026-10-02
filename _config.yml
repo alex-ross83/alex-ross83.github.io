@@ -4,7 +4,7 @@ email: ross@ross-lopez.rocks
 description: >- # this means to ignore newlines until "baseurl:"
   Bite-sized takes on AI, coding problems, quick starts, tips and tech news.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.ross-lopez.rocks" # the base hostname & protocol for your site, e.g. https://example.com
+url: "https://rosipedia.com" # the base hostname & protocol for your site, e.g. https://example.com
 timezone: Etc/UTC
 twitter_username: _lexRoss
 github_username:  alex-ross83

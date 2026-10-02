@@ -86,13 +86,13 @@ contains index.html '<html lang="en-US">'
 contains es/index.html '<html lang="es-MX">'
 contains "es/$P1" '<html lang="es-MX">'
 for f in "$P1" "es/$P1"; do
-  contains "$f" "hreflang=\"en-US\" href=\"https://blog.ross-lopez.rocks/$P1\""
-  contains "$f" "hreflang=\"es-MX\" href=\"https://blog.ross-lopez.rocks/es/$P1\""
+  contains "$f" "hreflang=\"en-US\" href=\"https://rosipedia.com/$P1\""
+  contains "$f" "hreflang=\"es-MX\" href=\"https://rosipedia.com/es/$P1\""
 done
-contains index.html 'hreflang="es-MX" href="https://blog.ross-lopez.rocks/es/"'
-contains es/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/"'
-contains "es/$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/es/$P1\""
-contains "$P1" "rel=\"canonical\" href=\"https://blog.ross-lopez.rocks/$P1\""
+contains index.html 'hreflang="es-MX" href="https://rosipedia.com/es/"'
+contains es/index.html 'hreflang="en-US" href="https://rosipedia.com/"'
+contains "es/$P1" "rel=\"canonical\" href=\"https://rosipedia.com/es/$P1\""
+contains "$P1" "rel=\"canonical\" href=\"https://rosipedia.com/$P1\""
 
 echo "== Task 5: UI strings"
 contains index.html '<span class="eyebrow">AI, code &amp; quick starts</span>'
@@ -130,11 +130,11 @@ contains es/index.html '<nav class="site-nav lang-switch" aria-label="Idioma">'
 
 echo "== Final review fixes"
 # Finding 1: og:url / JSON-LD url point at the /es/ URL on Spanish pages, English pages unaffected
-contains "es/$P1" 'og:url" content="https://blog.ross-lopez.rocks/es/'"$P1"'"'
-lacks "es/$P1" '"url":"https://blog.ross-lopez.rocks/'"$P1"'"'
-contains es/index.html 'og:url" content="https://blog.ross-lopez.rocks/es/"'
-contains "$P1" 'og:url" content="https://blog.ross-lopez.rocks/'"$P1"'"'
-lacks "es/$P1" 'blog.ross-lopez.rocks/es/es/'
+contains "es/$P1" 'og:url" content="https://rosipedia.com/es/'"$P1"'"'
+lacks "es/$P1" '"url":"https://rosipedia.com/'"$P1"'"'
+contains es/index.html 'og:url" content="https://rosipedia.com/es/"'
+contains "$P1" 'og:url" content="https://rosipedia.com/'"$P1"'"'
+lacks "es/$P1" 'rosipedia.com/es/es/'
 
 # Finding 2: og:locale is en_US on English pages, es_MX on Spanish pages (incl. pages with no lang front matter)
 contains index.html 'og:locale" content="en_US"'
@@ -148,11 +148,11 @@ contains es/index.html 'href="/es/feed.xml">vía RSS'
 lacks feed.xml 'Un nuevo día y un nuevo problema'
 contains "es/$P2" 'un nuevo problema por resolver'
 # every entry in the Spanish feed links inside /es/ (content-independent; jekyll-feed keeps only the newest 10)
-perl -0ne 'my @l = /<entry[^>]*>.*?<link href="([^"]+)"/sg; exit(!(@l && !grep { !m{^https://blog\.ross-lopez\.rocks/es/} } @l))' "$SITE/es/feed.xml" \
+perl -0ne 'my @l = /<entry[^>]*>.*?<link href="([^"]+)"/sg; exit(!(@l && !grep { !m{^https://rosipedia\.com/es/} } @l))' "$SITE/es/feed.xml" \
   && pass "es/feed.xml entries all link inside /es/" || bad "es/feed.xml has entries linking outside /es/"
 same_count index.html es/index.html 'class="feed-post"'
 lacks index.html 'Un nuevo día y un nuevo problema'
-contains es/about/index.html 'hreflang="en-US" href="https://blog.ross-lopez.rocks/about/"'
+contains es/about/index.html 'hreflang="en-US" href="https://rosipedia.com/about/"'
 
 echo "== Series"
 SER=series/index.html
@@ -263,7 +263,7 @@ exists sitemap.xml
 exists robots.txt
 absent es/sitemap.xml
 absent es/robots.txt
-contains robots.txt 'Sitemap: https://blog.ross-lopez.rocks/sitemap.xml'
+contains robots.txt 'Sitemap: https://rosipedia.com/sitemap.xml'
 contains sitemap.xml 'xmlns:xhtml="http://www.w3.org/1999/xhtml"'
 lacks sitemap.xml '/404.html'
 python3 -c 'import sys, xml.etree.ElementTree as E; E.parse(sys.argv[1])' "$SITE/sitemap.xml" 2>/dev/null \
@@ -344,8 +344,8 @@ echo "== Default social share image (audit S5)"
 exists social-card.png
 absent es/social-card.png
 for f in index.html es/index.html about/index.html es/about/index.html series/index.html es/series/index.html 404.html es/404.html "$P1" "es/$P1"; do
-  contains "$f" 'property="og:image" content="https://blog.ross-lopez.rocks/social-card.png"'
-  contains "$f" 'name="twitter:image" content="https://blog.ross-lopez.rocks/social-card.png"'
+  contains "$f" 'property="og:image" content="https://rosipedia.com/social-card.png"'
+  contains "$f" 'name="twitter:image" content="https://rosipedia.com/social-card.png"'
   contains "$f" 'name="twitter:card" content="summary_large_image"'
 done
 

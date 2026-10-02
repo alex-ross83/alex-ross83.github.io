@@ -11,7 +11,7 @@ ROOT = File.expand_path("..", __dir__)
 SITE = File.expand_path(ARGV[1] || "_site", Dir.pwd)
 LANGS = %w[en es].freeze
 DEFAULT_LANG = "en"
-SITE_URL = "https://blog.ross-lopez.rocks"
+SITE_URL = "https://rosipedia.com"
 ROOT_WORD = { "en" => "entries", "es" => "entradas" }.freeze
 $failed = false
 
