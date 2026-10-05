@@ -4,3 +4,8 @@ daily-coding-problem:
   description:
     en: "My solutions to the problems from the Daily Coding Problem newsletter, with the reasoning behind each answer."
     es: "Mis soluciones a los problemas del boletín Daily Coding Problem, con el razonamiento detrás de cada respuesta."
+prompts-101:
+  title: "Prompts 101"
+  description:
+    en: "A beginner's series on using AI well, one part at a time: what to put in a prompt and what the AI can actually see."
+    es: "Una serie para principiantes sobre cómo usar bien la IA, una parte a la vez: qué poner en un prompt y qué es lo que la IA alcanza a ver."
