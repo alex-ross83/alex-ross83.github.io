@@ -394,6 +394,12 @@ for f in index.html es/index.html; do
 done
 contains assets/main.css '.x-icon'
 
+echo "== Footer has no GitHub profile link"
+for f in index.html es/index.html; do
+  lacks "$f" 'href="https://github.com/'
+  lacks "$f" 'minima-social-icons.svg#github'
+done
+
 echo "== Post images (new)"
 ruby "$(dirname "$0")/site_checks.rb" images "$SITE" || fail=1
 contains assets/main.css '.post-content img {'

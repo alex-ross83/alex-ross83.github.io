@@ -7,7 +7,6 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rosipedia.com" # the base hostname & protocol for your site, e.g. https://example.com
 timezone: Etc/UTC
 twitter_username: Rosipedia
-github_username:  alex-ross83
 # jekyll-seo-tag reads this nested hash for the twitter:site meta tag (same handle as
 # twitter_username above, which minima's footer social link uses).
 twitter:
