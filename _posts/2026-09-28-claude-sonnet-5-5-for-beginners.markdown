@@ -12,6 +12,8 @@ permalink: /entries/tips-news/claude-sonnet-5-5-for-beginners/
 
 Claude Sonnet 5.5, Anthropic's everyday model, just got a big upgrade. Here's what changed, plus the one spot where last week's advice gets an exception.
 
+*Updated October 7: Haiku 5.5 is out, and free accounts get it. [Here's what it's for and when to pick it over Sonnet](/entries/tips-news/claude-haiku-5-5-for-beginners/).*
+
 ## What Sonnet 5.5 is, in plain words
 
 Anthropic released Claude Sonnet 5.5 on September 28, 2026, six days after [Opus 5.5](/entries/tips-news/claude-opus-5-5-for-beginners/). Both are *models*, the name for the AI that answers you inside the Claude app.
@@ -146,7 +148,7 @@ Look at the jump at the bottom. At max, a task cost more than Opus 5.5's $5.98 a
 
 Anthropic makes the same point from the other side. It says that on Medium, Sonnet 5.5 beats Sonnet 5's best Terminal-Bench 4.0 score "for less than a tenth of the cost per task," and that it costs up to 30% less per task than Sonnet 5 for most work.
 
-Two smaller notes. Haiku 5.5, the lightest model in the family, will join "in the coming weeks," per the announcement. And Anthropic says Sonnet 5.5 is the first Sonnet to beat Pokémon Red working only from screenshots, which is a fun way of saying its eyes got better.
+Two smaller notes. Haiku 5.5, the lightest model in the family, arrived on October 7 ([my explainer](/entries/tips-news/claude-haiku-5-5-for-beginners/)). And Anthropic says Sonnet 5.5 is the first Sonnet to beat Pokémon Red working only from screenshots, which is a fun way of saying its eyes got better.
 
 Sources: [Anthropic's Sonnet 5.5 announcement](https://www.anthropic.com/claude-sonnet-5-5), [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5), [Anthropic's Opus 5.5 announcement](https://www.anthropic.com/claude-opus-5-5), [Claude pricing](https://claude.com/pricing) and [Artificial Analysis's cost-per-effort figures](https://artificialanalysis.ai/models/releases/claude-sonnet-5-5).
 

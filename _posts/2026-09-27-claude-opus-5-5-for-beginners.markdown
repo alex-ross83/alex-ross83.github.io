@@ -14,6 +14,8 @@ Anthropic's newest AI, Claude Opus 5.5, rewards plain requests over clever trick
 
 *Updated September 28: Sonnet 5.5 is out, and free accounts now get it. [Here's what changed](/entries/tips-news/claude-sonnet-5-5-for-beginners/).*
 
+*Updated October 7: Haiku 5.5, the small, fast model in the family, is out. [Here's when to pick it](/entries/tips-news/claude-haiku-5-5-for-beginners/).*
+
 ## What Opus 5.5 is, in plain words
 
 Anthropic released Claude Opus 5.5 on September 22, 2026. It's a new *model*, which is just the name for the AI that answers you inside the Claude app.
@@ -117,7 +119,7 @@ Benchmark rows are vendor-reported by Anthropic unless marked independent. n/p m
 
 Effort deserves one warning. In the app it's the Effort menu, and developers get a dial from low to max, and Opus 5.5 starts at medium, where Anthropic says it matches or beats Opus 5 on high in coding and office-work tests. Higher isn't automatically better. Artificial Analysis found its test tasks cost about $1.34 each at medium and $5.98 at max, and at max Opus 5.5 writes so much that it lands near Opus 5's cost per task. My guess, not a measured fact: on a paid plan, heavier thinking also eats your usage limits faster.
 
-Anthropic also says Opus 5.5 costs about 40% less to run than Opus 5, counting the lower price and shorter work together. Sonnet 5.5 followed on September 28 ([my explainer](/entries/tips-news/claude-sonnet-5-5-for-beginners/)), and Haiku 5.5 is due "in the coming weeks," per Anthropic.
+Anthropic also says Opus 5.5 costs about 40% less to run than Opus 5, counting the lower price and shorter work together. Sonnet 5.5 followed on September 28 ([my explainer](/entries/tips-news/claude-sonnet-5-5-for-beginners/)), and Haiku 5.5 arrived on October 7 ([here's that one](/entries/tips-news/claude-haiku-5-5-for-beginners/)).
 
 Sources: [Anthropic's announcement](https://www.anthropic.com/claude-opus-5-5), [Prompting Claude Opus 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5), [Claude pricing](https://claude.com/pricing), [Artificial Analysis](https://artificialanalysis.ai/articles/claude-opus-5-5) and [its cost-per-task figures](https://artificialanalysis.ai/models/releases/claude-opus-5-5).
 

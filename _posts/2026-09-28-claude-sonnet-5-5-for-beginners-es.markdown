@@ -12,6 +12,8 @@ permalink: /entradas/tips-noticias/claude-sonnet-5-5-desde-cero/
 
 Claude Sonnet 5.5, el modelo de Anthropic para el día a día, acaba de recibir una mejora grande. Aquí va qué cambió y el único punto donde el consejo de la semana pasada tiene una excepción.
 
+*Actualizado el 7 de octubre: ya salió Haiku 5.5 y las cuentas gratis ya lo tienen. [Aquí te cuento para qué sirve y cuándo elegirlo en vez de Sonnet](/es/entradas/tips-noticias/claude-haiku-5-5-desde-cero/).*
+
 ## Qué es Sonnet 5.5, sin tecnicismos
 
 Anthropic lanzó Claude Sonnet 5.5 el 28 de septiembre de 2026, seis días después de [Opus 5.5](/es/entradas/tips-noticias/claude-opus-5-5-desde-cero/). Los dos son *modelos*, que es simplemente el nombre de la IA que te contesta dentro de la app de Claude.
@@ -146,7 +148,7 @@ Fíjate en el brinco del final. En máximo, cada tarea costó más que los $5.98
 
 Anthropic dice lo mismo desde el otro lado. Según su anuncio, en Medium Sonnet 5.5 supera el mejor puntaje de Sonnet 5 en Terminal-Bench 4.0 por menos de una décima parte del costo por tarea, y en la mayoría del trabajo cuesta hasta 30% menos por tarea que Sonnet 5.
 
-Dos notas más chicas. Haiku 5.5, el modelo más ligero de la familia, llega "en las próximas semanas", según el anuncio. Y Anthropic dice que Sonnet 5.5 es el primer Sonnet que le gana a Pokémon Red usando solo capturas de pantalla, que es una forma divertida de decir que ahora ve mejor.
+Dos notas más chicas. Haiku 5.5, el modelo más ligero de la familia, salió el 7 de octubre ([aquí te lo explico](/es/entradas/tips-noticias/claude-haiku-5-5-desde-cero/)). Y Anthropic dice que Sonnet 5.5 es el primer Sonnet que le gana a Pokémon Red usando solo capturas de pantalla, que es una forma divertida de decir que ahora ve mejor.
 
 Fuentes (en inglés): [anuncio de Sonnet 5.5 de Anthropic](https://www.anthropic.com/claude-sonnet-5-5), [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5), [anuncio de Opus 5.5 de Anthropic](https://www.anthropic.com/claude-opus-5-5), [precios de Claude](https://claude.com/pricing) y [los costos por nivel de esfuerzo de Artificial Analysis](https://artificialanalysis.ai/models/releases/claude-sonnet-5-5).
 

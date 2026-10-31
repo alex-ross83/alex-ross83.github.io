@@ -14,6 +14,8 @@ La IA más nueva de Anthropic, Claude Opus 5.5, responde mejor a peticiones senc
 
 *Actualizado el 28 de septiembre: ya salió Sonnet 5.5 y las cuentas gratis ya lo tienen. [Aquí te cuento qué cambió](/es/entradas/tips-noticias/claude-sonnet-5-5-desde-cero/).*
 
+*Actualizado el 7 de octubre: ya salió Haiku 5.5, el modelo chico y rápido de la familia. [Aquí te cuento cuándo conviene usarlo](/es/entradas/tips-noticias/claude-haiku-5-5-desde-cero/).*
+
 ## Qué es Opus 5.5, sin tecnicismos
 
 Anthropic lanzó Claude Opus 5.5 el 22 de septiembre de 2026. Es un *modelo* nuevo, que es simplemente el nombre de la IA que te contesta dentro de la app de Claude.
@@ -117,7 +119,7 @@ Las filas de benchmarks son reportadas por Anthropic, salvo la marcada como inde
 
 Sobre el esfuerzo, una advertencia. En la app es el menú de Effort, y los desarrolladores tienen una perilla que va de bajo a máximo, y Opus 5.5 arranca en medio, donde según Anthropic iguala o supera a Opus 5 en alto en pruebas de programación y trabajo de oficina. Más alto no siempre es mejor. Artificial Analysis encontró que sus tareas de prueba costaban unos $1.34 cada una en medio y $5.98 en máximo, y en máximo Opus 5.5 escribe tanto que termina costando casi lo mismo por tarea que Opus 5. Mi suposición, no un dato medido: en un plan de pago, pensar de más probablemente también se come tus límites de uso más rápido.
 
-Anthropic también dice que Opus 5.5 cuesta alrededor de 40% menos de operar que Opus 5, sumando el precio más bajo y que termina el trabajo con menos texto. Sonnet 5.5 llegó el 28 de septiembre ([aquí lo explico](/es/entradas/tips-noticias/claude-sonnet-5-5-desde-cero/)), y Haiku 5.5 llega "en las próximas semanas", según Anthropic.
+Anthropic también dice que Opus 5.5 cuesta alrededor de 40% menos de operar que Opus 5, sumando el precio más bajo y que termina el trabajo con menos texto. Sonnet 5.5 llegó el 28 de septiembre ([aquí lo explico](/es/entradas/tips-noticias/claude-sonnet-5-5-desde-cero/)), y Haiku 5.5 salió el 7 de octubre ([aquí te lo explico](/es/entradas/tips-noticias/claude-haiku-5-5-desde-cero/)).
 
 Fuentes (en inglés): [anuncio de Anthropic](https://www.anthropic.com/claude-opus-5-5), [Prompting Claude Opus 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5), [precios de Claude](https://claude.com/pricing), [Artificial Analysis](https://artificialanalysis.ai/articles/claude-opus-5-5) y [sus costos por tarea](https://artificialanalysis.ai/models/releases/claude-opus-5-5).
 
